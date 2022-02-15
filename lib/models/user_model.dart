@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 class UserModel {
+  String? userId;
   final String name;
   final String surName;
   final String mail;
@@ -14,6 +15,7 @@ class UserModel {
   final List? closingDeparments;
   final List? wantedUniversities;
   UserModel({
+    this.userId,
     required this.name,
     required this.surName,
     required this.mail,
@@ -27,6 +29,7 @@ class UserModel {
   });
 
   UserModel copyWith({
+    String? userId,
     String? name,
     String? surName,
     String? mail,
@@ -39,6 +42,7 @@ class UserModel {
     List? wantedUniversities,
   }) {
     return UserModel(
+      userId: userId ?? this.userId,
       name: name ?? this.name,
       surName: surName ?? this.surName,
       mail: mail ?? this.mail,
@@ -54,6 +58,7 @@ class UserModel {
 
   Map<String, dynamic> toMap() {
     return {
+      'userId': userId,
       'name': name,
       'surName': surName,
       'mail': mail,
@@ -69,6 +74,7 @@ class UserModel {
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
+      userId: map['userId'] ?? '',
       name: map['name'] ?? '',
       surName: map['surName'] ?? '',
       mail: map['mail'] ?? '',
@@ -89,7 +95,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(name: $name, surName: $surName, mail: $mail, phoneNumber: $phoneNumber, dateOfBirth: $dateOfBirth, studyingSchool: $studyingSchool, grade: $grade, wantedDepartment: $wantedDepartment, closingDeparments: $closingDeparments, wantedUniversities: $wantedUniversities)';
+    return 'UserModel(userId: $userId, name: $name, surName: $surName, mail: $mail, phoneNumber: $phoneNumber, dateOfBirth: $dateOfBirth, studyingSchool: $studyingSchool, grade: $grade, wantedDepartment: $wantedDepartment, closingDeparments: $closingDeparments, wantedUniversities: $wantedUniversities)';
   }
 
   @override
@@ -97,6 +103,7 @@ class UserModel {
     if (identical(this, other)) return true;
 
     return other is UserModel &&
+        other.userId == userId &&
         other.name == name &&
         other.surName == surName &&
         other.mail == mail &&
@@ -111,7 +118,8 @@ class UserModel {
 
   @override
   int get hashCode {
-    return name.hashCode ^
+    return userId.hashCode ^
+        name.hashCode ^
         surName.hashCode ^
         mail.hashCode ^
         phoneNumber.hashCode ^

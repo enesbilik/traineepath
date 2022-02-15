@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:trainee_path/base/base_auth_view.dart';
 import 'package:trainee_path/constants/auth_data.dart';
 import 'package:trainee_path/constants/constants.dart';
+import 'package:trainee_path/models/user_model.dart';
+import 'package:trainee_path/services/firebase/auth_service.dart';
+import 'package:trainee_path/validator/user_validate.dart';
 import 'package:trainee_path/views/auth/let_sign_up_page.dart';
 import 'package:trainee_path/widgets/custom_button.dart';
 import 'package:trainee_path/widgets/custom_text_field.dart';
@@ -15,7 +17,23 @@ class SignUpPage extends StatefulWidget {
   _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends BaseAuthView<SignUpPage> {
+class _SignUpPageState extends BaseAuthView<SignUpPage> with UserValidateMixin {
+  late TextEditingController _nameEditingController;
+  late TextEditingController _surnameEditingController;
+  late TextEditingController _phoneNumberEditingController;
+  late TextEditingController _mailEditingController;
+  late TextEditingController _passwordEditingController;
+
+  @override
+  void initState() {
+    _nameEditingController = TextEditingController();
+    _surnameEditingController = TextEditingController();
+    _phoneNumberEditingController = TextEditingController();
+    _mailEditingController = TextEditingController();
+    _passwordEditingController = TextEditingController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,28 +48,33 @@ class _SignUpPageState extends BaseAuthView<SignUpPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: dynamicHeight(0.07)),
-              const CustomTextField(
+              CustomTextField(
                 hintText: AuthData.nameText,
                 keyboardType: TextInputType.name,
+                controller: _nameEditingController,
               ),
               baseSpace,
-              const CustomTextField(
+              CustomTextField(
                 hintText: AuthData.surnameText,
                 keyboardType: TextInputType.name,
+                controller: _surnameEditingController,
               ),
               baseSpace,
-              const CustomTextField(
+              CustomTextField(
                 hintText: AuthData.numberText,
                 keyboardType: TextInputType.phone,
+                controller: _phoneNumberEditingController,
               ),
               baseSpace,
-              const CustomTextField(
+              CustomTextField(
                 hintText: AuthData.mailText,
                 keyboardType: TextInputType.emailAddress,
+                controller: _mailEditingController,
               ),
               baseSpace,
-              const CustomTextField(
+              CustomTextField(
                 hintText: AuthData.passwordText,
+                controller: _passwordEditingController,
                 keyboardType: TextInputType.visiblePassword,
                 isObscure: true,
               ),
@@ -61,12 +84,16 @@ class _SignUpPageState extends BaseAuthView<SignUpPage> {
               CustomButton(
                 text: AuthData.continueText,
                 icon: Icons.arrow_forward_rounded,
-                click: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LetSignUpPage()),
-                  );
+                click: () async {
+                  print(_nameEditingController.text);
+                  var userModel = createUserModel();
+                  var back = await AuthService.register(userModel, "password");
+                  print(back!.user!.email);
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => const LetSignUpPage()),
+                  // );
                 },
               ),
               SizedBox(
@@ -107,6 +134,26 @@ class _SignUpPageState extends BaseAuthView<SignUpPage> {
         fontWeight: FontWeight.normal,
       ),
       textAlign: TextAlign.center,
+    );
+  }
+
+  UserModel createUserModel() {
+    var nameResult = nameValidate(_nameEditingController.text);
+    var surNameResult = nameValidate(_surnameEditingController.text);
+    var phoneNumberResult = nameValidate(_phoneNumberEditingController.text);
+    var passwordResult = nameValidate(_passwordEditingController.text);
+
+    if (nameResult != null) print(nameResult);
+    if (surNameResult != null) print(nameResult);
+    if (phoneNumberResult != null) print(nameResult);
+    if (passwordResult != null) print(nameResult);
+
+    return UserModel(
+      name: _nameEditingController.text,
+      surName: _surnameEditingController.text,
+      mail: _mailEditingController.text,
+      phoneNumber: _phoneNumberEditingController.text,
+      dateOfBirth: DateTime.now(),
     );
   }
 }

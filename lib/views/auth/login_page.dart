@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:trainee_path/base/base_auth_view.dart';
 import 'package:trainee_path/constants/auth_data.dart';
 import 'package:trainee_path/constants/constants.dart';
+import 'package:trainee_path/services/firebase/auth_service.dart';
 import 'package:trainee_path/views/auth/sign_up_page.dart';
 import 'package:trainee_path/widgets/custom_button.dart';
 import 'package:trainee_path/widgets/custom_text_field.dart';
