@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trainee_path/constants/constants.dart';
 import 'package:trainee_path/views/auth/login_page.dart';
+import 'package:trainee_path/views/home/main_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'TraineePath',
       theme: getTheme(),
-      home: const LoginPage(),
+      home: const MainPage(),
     );
   }
 
