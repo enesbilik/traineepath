@@ -1,25 +1,32 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trainee_path/base/base_auth_view.dart';
 import 'package:trainee_path/constants/auth_data.dart';
 import 'package:trainee_path/constants/constants.dart';
-import 'package:trainee_path/temp_data/universities.dart';
+import 'package:trainee_path/models/user_model.dart';
+import 'package:trainee_path/services/firebase/auth_service.dart';
+import 'package:trainee_path/utilities/utils.dart';
+import 'package:trainee_path/views/auth/login_page.dart';
 import 'package:trainee_path/widgets/custom_button.dart';
-import 'package:trainee_path/widgets/custom_item_picker.dart';
 import 'package:trainee_path/widgets/custom_text_field.dart';
 
 class LetSignUpPage extends StatefulWidget {
-  const LetSignUpPage({Key? key}) : super(key: key);
+  final UserModel myUser;
+  final String password;
+  const LetSignUpPage({Key? key, required this.myUser, required this.password})
+      : super(key: key);
 
   @override
   _LetSignUpPageState createState() => _LetSignUpPageState();
 }
 
 class _LetSignUpPageState extends BaseAuthView<LetSignUpPage> {
+  bool _isLoading = false;
   @override
   void initState() {
     super.initState();
-    UniversityService.readJson();
+    // UniversityService.readJson();
   }
 
   List temp = [];
@@ -67,7 +74,10 @@ class _LetSignUpPageState extends BaseAuthView<LetSignUpPage> {
               // ),
               baseSpace2,
               const Spacer(),
-              const CustomButton(text: AuthData.doneProfile),
+              _isLoading
+                  ? const CircularProgressIndicator()
+                  : CustomButton(
+                      text: AuthData.doneProfile, click: _registerMethod),
               SizedBox(
                 height: dynamicHeight(0.15),
               ),
@@ -105,5 +115,33 @@ class _LetSignUpPageState extends BaseAuthView<LetSignUpPage> {
       AuthData.knowYouText,
       style: kTextStyleBold.copyWith(fontSize: 22),
     );
+  }
+
+  void _registerMethod() async {
+    _changeLoading();
+    try {
+      var userCredential =
+          await AuthService.register(widget.myUser, widget.password);
+
+      if (userCredential != null) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginPage()),
+            (route) => false);
+        Utils.showSnackBar(
+            context, "Kullanıcı başarılı bir şekilde oluşturuldu");
+      }
+    } on FirebaseAuthException catch (e) {
+      Utils.showSnackBar(context, e.message.toString());
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //     SnackBar(content: Text(e.message.toString())));
+    }
+    _changeLoading();
+  }
+
+  void _changeLoading() {
+    setState(() {
+      _isLoading = !_isLoading;
+    });
   }
 }

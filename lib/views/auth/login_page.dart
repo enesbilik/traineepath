@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trainee_path/base/base_auth_view.dart';
 import 'package:trainee_path/constants/auth_data.dart';
 import 'package:trainee_path/constants/constants.dart';
 import 'package:trainee_path/services/firebase/auth_service.dart';
+import 'package:trainee_path/utilities/utils.dart';
 import 'package:trainee_path/views/auth/sign_up_page.dart';
 import 'package:trainee_path/widgets/custom_button.dart';
 import 'package:trainee_path/widgets/custom_text_field.dart';
@@ -16,6 +18,18 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends BaseAuthView<LoginPage> {
+  final _firebaseAuth = AuthService();
+  late TextEditingController _mailEditingController;
+  late TextEditingController _passwordEditingController;
+  bool _isLoading = false;
+
+  @override
+  void initState() {
+    _mailEditingController = TextEditingController();
+    _passwordEditingController = TextEditingController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,20 +50,27 @@ class _LoginPageState extends BaseAuthView<LoginPage> {
               const Spacer(flex: 1),
               _getTopText(),
               const Spacer(flex: 1),
-              const CustomTextField(
+              CustomTextField(
                 hintText: AuthData.mailText,
                 keyboardType: TextInputType.emailAddress,
+                controller: _mailEditingController,
               ),
               baseSpace,
-              const CustomTextField(
+              CustomTextField(
                 hintText: AuthData.passwordText,
                 keyboardType: TextInputType.visiblePassword,
                 isObscure: true,
+                controller: _passwordEditingController,
               ),
               const SizedBox(height: 2),
               _getForgotPasswordButton(),
               const Spacer(flex: 3),
-              const CustomButton(text: AuthData.logInText),
+              _isLoading
+                  ? const CircularProgressIndicator()
+                  : CustomButton(
+                      text: AuthData.logInText,
+                      click: _signInMethod,
+                    ),
               _getSignUpTexts(),
               const Spacer(flex: 1),
             ],
@@ -116,5 +137,36 @@ class _LoginPageState extends BaseAuthView<LoginPage> {
 
   AppBar _appBar() {
     return AppBar();
+  }
+
+  void _signInMethod() async {
+    _changeLoading();
+    try {
+      var userCredential = await _firebaseAuth.signIn(
+          _mailEditingController.text, _passwordEditingController.text);
+
+      if (userCredential != null) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const Scaffold(
+                      body: Center(
+                        child: Text("New Page"),
+                      ),
+                    )),
+            (route) => false);
+      }
+    } on FirebaseAuthException catch (e) {
+      Utils.showSnackBar(context, e.message.toString());
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //     SnackBar(content: Text(e.message.toString())));
+    }
+    _changeLoading();
+  }
+
+  void _changeLoading() {
+    setState(() {
+      _isLoading = !_isLoading;
+    });
   }
 }

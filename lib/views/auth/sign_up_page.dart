@@ -1,10 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:trainee_path/base/base_auth_view.dart';
 import 'package:trainee_path/constants/auth_data.dart';
 import 'package:trainee_path/constants/constants.dart';
 import 'package:trainee_path/models/user_model.dart';
-import 'package:trainee_path/services/firebase/auth_service.dart';
-import 'package:trainee_path/validator/user_validate.dart';
+import 'package:trainee_path/utilities/utils.dart';
 import 'package:trainee_path/views/auth/let_sign_up_page.dart';
 import 'package:trainee_path/widgets/custom_button.dart';
 import 'package:trainee_path/widgets/custom_text_field.dart';
@@ -17,12 +17,13 @@ class SignUpPage extends StatefulWidget {
   _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends BaseAuthView<SignUpPage> with UserValidateMixin {
+class _SignUpPageState extends BaseAuthView<SignUpPage> {
   late TextEditingController _nameEditingController;
   late TextEditingController _surnameEditingController;
   late TextEditingController _phoneNumberEditingController;
   late TextEditingController _mailEditingController;
   late TextEditingController _passwordEditingController;
+  late UserModel myUser;
 
   @override
   void initState() {
@@ -84,17 +85,7 @@ class _SignUpPageState extends BaseAuthView<SignUpPage> with UserValidateMixin {
               CustomButton(
                 text: AuthData.continueText,
                 icon: Icons.arrow_forward_rounded,
-                click: () async {
-                  print(_nameEditingController.text);
-                  var userModel = createUserModel();
-                  var back = await AuthService.register(userModel, "password");
-                  print(back!.user!.email);
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => const LetSignUpPage()),
-                  // );
-                },
+                click: _assignUser,
               ),
               SizedBox(
                 height: dynamicHeight(0.15),
@@ -138,16 +129,6 @@ class _SignUpPageState extends BaseAuthView<SignUpPage> with UserValidateMixin {
   }
 
   UserModel createUserModel() {
-    var nameResult = nameValidate(_nameEditingController.text);
-    var surNameResult = nameValidate(_surnameEditingController.text);
-    var phoneNumberResult = nameValidate(_phoneNumberEditingController.text);
-    var passwordResult = nameValidate(_passwordEditingController.text);
-
-    if (nameResult != null) print(nameResult);
-    if (surNameResult != null) print(nameResult);
-    if (phoneNumberResult != null) print(nameResult);
-    if (passwordResult != null) print(nameResult);
-
     return UserModel(
       name: _nameEditingController.text,
       surName: _surnameEditingController.text,
@@ -155,5 +136,39 @@ class _SignUpPageState extends BaseAuthView<SignUpPage> with UserValidateMixin {
       phoneNumber: _phoneNumberEditingController.text,
       dateOfBirth: DateTime.now(),
     );
+  }
+
+  void _assignUser() async {
+    var resultOfValidate = _validateUserInfos();
+    if (resultOfValidate != null) {
+      Utils.showSnackBar(context, resultOfValidate);
+      return;
+    }
+    myUser = createUserModel();
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LetSignUpPage(
+          myUser: myUser,
+          password: _passwordEditingController.text,
+        ),
+      ),
+    );
+  }
+
+  String? _validateUserInfos() {
+    if (_nameEditingController.text.length <= 2) {
+      return "Lütfen isim giriniz";
+    } else if (_surnameEditingController.text.length <= 2) {
+      return "Lütfen soyisim giriniz";
+    } else if (_phoneNumberEditingController.text.length != 10) {
+      return "Lütfen 10 haneli cep telefonu numaranızı giriniz";
+    } else if (_mailEditingController.text.isEmpty ||
+        !_mailEditingController.text.contains('@')) {
+      return "Lütfen email adresinizi giriniz";
+    } else if (_passwordEditingController.text.length < 6) {
+      return "Parola en az 6 karakter olmalı";
+    }
+    return null;
   }
 }

@@ -32,7 +32,7 @@ class Utils {
 
   static void showSnackBar(BuildContext context, String text) {
     final snackBar = SnackBar(
-      content: Text(text, style: const TextStyle(fontSize: 20)),
+      content: Text(text, style: const TextStyle(fontSize: 16)),
     );
 
     ScaffoldMessenger.of(context)
