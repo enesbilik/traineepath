@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:trainee_path/constants/constants.dart';
-import 'package:trainee_path/views/home/bookmark_page.dart';
-import 'package:trainee_path/views/home/home_page.dart';
-import 'package:trainee_path/views/home/profile_page.dart';
+import 'package:trainee_path/views/tabs/bookmark/bookmark_page.dart';
+import 'package:trainee_path/views/tabs/home/home_page.dart';
+import 'package:trainee_path/views/tabs/profile/profile_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -12,13 +12,18 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  List<Widget> tabs = [const HomePage(), const BookMark(), const ProfilePage()];
+  List<Widget> tabs = [
+    const HomePage(),
+    const BookMark(),
+    const ProfilePage(),
+  ];
 
   int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //appBar: AppBar(),
       bottomNavigationBar: BottomNavigationBar(
         selectedFontSize: 14,
         unselectedFontSize: 14,
@@ -41,7 +46,9 @@ class _MainPageState extends State<MainPage> {
         BottomNavigationBarItem(
           icon: Icon(Icons.home_outlined),
           label: "Ana sayfa",
-          activeIcon: Icon(Icons.home),
+          activeIcon: Icon(
+            Icons.home,
+          ),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.bookmark_outline),

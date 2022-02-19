@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:trainee_path/base/base_auth_view.dart';
 import 'package:trainee_path/constants/auth_data.dart';
 import 'package:trainee_path/constants/constants.dart';
@@ -17,7 +16,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends BaseAuthView<LoginPage> {
+class _LoginPageState extends BaseViewState<LoginPage> {
   final _firebaseAuth = AuthService();
   late TextEditingController _mailEditingController;
   late TextEditingController _passwordEditingController;
@@ -44,7 +43,7 @@ class _LoginPageState extends BaseAuthView<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              baseSpace,
+              baseSpace1,
               const Spacer(flex: 1),
               _getLogo(),
               const Spacer(flex: 1),
@@ -55,7 +54,7 @@ class _LoginPageState extends BaseAuthView<LoginPage> {
                 keyboardType: TextInputType.emailAddress,
                 controller: _mailEditingController,
               ),
-              baseSpace,
+              baseSpace1,
               CustomTextField(
                 hintText: AuthData.passwordText,
                 keyboardType: TextInputType.visiblePassword,

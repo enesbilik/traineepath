@@ -2,8 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trainee_path/constants/constants.dart';
-import 'package:trainee_path/views/auth/login_page.dart';
-import 'package:trainee_path/views/home/main_page.dart';
+import 'package:trainee_path/views/tabs/home/subtopics_page.dart';
+import 'package:trainee_path/views/tabs/main_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,12 +19,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TraineePath',
-      theme: getTheme(),
-      home: const MainPage(),
+      theme: theme,
+      home: const SubTopicPage(),
     );
   }
 
-  ThemeData getTheme() {
+  ThemeData get theme {
     return ThemeData(
       primaryColor: kPrimary,
       appBarTheme: const AppBarTheme(

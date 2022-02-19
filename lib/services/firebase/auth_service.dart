@@ -22,7 +22,7 @@ class AuthService {
     if (userCredential.user != null) {
       _user.userId = userCredential.user!.uid;
       await _firebaseFirestore
-          .collection("Users")
+          .collection("USERS")
           .doc(_user.userId)
           .set(_user.toMap());
     }

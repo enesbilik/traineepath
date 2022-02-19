@@ -8,6 +8,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final IconData? icon;
   final TextEditingController? controller;
+  final Function(String)? onChanged;
 
   const CustomTextField({
     Key? key,
@@ -16,6 +17,7 @@ class CustomTextField extends StatelessWidget {
     this.isObscure = false,
     this.icon,
     this.controller,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -23,6 +25,7 @@ class CustomTextField extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: TextField(
+        onChanged: onChanged,
         controller: controller,
         autocorrect: false,
         keyboardType: keyboardType,

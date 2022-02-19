@@ -17,7 +17,7 @@ class SignUpPage extends StatefulWidget {
   _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends BaseAuthView<SignUpPage> {
+class _SignUpPageState extends BaseViewState<SignUpPage> {
   late TextEditingController _nameEditingController;
   late TextEditingController _surnameEditingController;
   late TextEditingController _phoneNumberEditingController;
@@ -43,7 +43,7 @@ class _SignUpPageState extends BaseAuthView<SignUpPage> {
       body: SingleChildScrollView(
         child: Container(
           padding: basePadding,
-          height: dynamicHeight(1),
+          height: dynamicHeight(0.95),
           width: dynamicWidth(1),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -54,41 +54,41 @@ class _SignUpPageState extends BaseAuthView<SignUpPage> {
                 keyboardType: TextInputType.name,
                 controller: _nameEditingController,
               ),
-              baseSpace,
+              baseSpace1,
               CustomTextField(
                 hintText: AuthData.surnameText,
                 keyboardType: TextInputType.name,
                 controller: _surnameEditingController,
               ),
-              baseSpace,
+              baseSpace1,
               CustomTextField(
                 hintText: AuthData.numberText,
                 keyboardType: TextInputType.phone,
                 controller: _phoneNumberEditingController,
               ),
-              baseSpace,
+              baseSpace1,
               CustomTextField(
                 hintText: AuthData.mailText,
                 keyboardType: TextInputType.emailAddress,
                 controller: _mailEditingController,
               ),
-              baseSpace,
+              baseSpace1,
               CustomTextField(
                 hintText: AuthData.passwordText,
                 controller: _passwordEditingController,
                 keyboardType: TextInputType.visiblePassword,
                 isObscure: true,
               ),
-              baseSpace,
+              baseSpace1,
               const DatePickerPage(),
-              const Spacer(flex: 3),
+              const Spacer(flex: 2),
               CustomButton(
                 text: AuthData.continueText,
                 icon: Icons.arrow_forward_rounded,
                 click: _assignUser,
               ),
               SizedBox(
-                height: dynamicHeight(0.15),
+                height: dynamicHeight(0.1),
               ),
             ],
           ),

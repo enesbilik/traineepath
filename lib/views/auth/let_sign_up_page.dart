@@ -21,7 +21,7 @@ class LetSignUpPage extends StatefulWidget {
   _LetSignUpPageState createState() => _LetSignUpPageState();
 }
 
-class _LetSignUpPageState extends BaseAuthView<LetSignUpPage> {
+class _LetSignUpPageState extends BaseViewState<LetSignUpPage> {
   bool _isLoading = false;
   @override
   void initState() {
@@ -78,9 +78,7 @@ class _LetSignUpPageState extends BaseAuthView<LetSignUpPage> {
                   ? const CircularProgressIndicator()
                   : CustomButton(
                       text: AuthData.doneProfile, click: _registerMethod),
-              SizedBox(
-                height: dynamicHeight(0.15),
-              ),
+              SizedBox(height: dynamicHeight(0.15)),
 
               /* CustomItemPicker(
                 dataList: UniversityService.universities,
