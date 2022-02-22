@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:trainee_path/constants/constants.dart';
 import 'package:trainee_path/models/deparment_model.dart';
+import 'package:trainee_path/views/tabs/home/subtopic_page2.dart';
+import 'package:trainee_path/views/tabs/home/subtopics_page.dart';
 
 class DeparmentCard extends StatelessWidget {
   final DepartmentModel department;
@@ -17,7 +19,13 @@ class DeparmentCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(_circular)),
         child: InkWell(
           borderRadius: BorderRadius.circular(_circular),
-          onTap: () => print(department.title),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SubTopicPage(id: department.id),
+                ));
+          },
           child: Stack(
             fit: StackFit.expand,
             children: [

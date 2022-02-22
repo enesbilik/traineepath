@@ -80,7 +80,7 @@ class _SignUpPageState extends BaseViewState<SignUpPage> {
                 isObscure: true,
               ),
               baseSpace1,
-              const DatePickerPage(),
+              //const DatePickerPage(),
               const Spacer(flex: 2),
               CustomButton(
                 text: AuthData.continueText,

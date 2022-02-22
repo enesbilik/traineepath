@@ -1,0 +1,83 @@
+[
+    {
+        "id": 1,
+        "image": "1İmage url",
+        "title": "1Tıp Fakültesi",
+        "main_topics": [
+            {
+                "image": "İmage1 url",
+                "title": "Anatomi1",
+                "sub_topics": [
+                    {
+                        "title": "Tıp ve Sanat1",
+                        "subtitle": "Tıp sanat mıdır?1",
+                        "content": {
+                            "title": "Detay Başlık",
+                            "subtitle": "Detay Alt Başlık",
+                            "title_content": "Dety İçerik",
+                            "subtitle_content": "Dety Alt İçerik",
+                            "videos": [
+                                "video1 url",
+                                "video2 url"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "image": "İmage2 url",
+        "title": "Tıp Fak2ültesi",
+        "main_topics": [
+            {
+                "image": "İmage2 url",
+                "title": "2Anatomi",
+                "sub_topics": [
+                    {
+                        "title": "Tıp ve Sanat2",
+                        "subtitle": "Tıp sanat mıdır2?",
+                        "content": {
+                            "title": "Detay Başl2ık",
+                            "subtitle": "Detay Alt 2Başlık",
+                            "title_content": "Dety 2İçerik",
+                            "subtitle_content": "Dety2 Alt İçerik",
+                            "videos": [
+                                "video2 url",
+                                "video2 url"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "image": "İmag3e url",
+        "title": "Tıp3 Fakültesi",
+        "main_topics": [
+            {
+                "image": "İmage3 url",
+                "title": "Anat3omi",
+                "sub_topics": [
+                    {
+                        "title": "Tıp v3e Sanat",
+                        "subtitle": "Tıp sana3t mıdır?",
+                        "content": {
+                            "title": "Detay B3aş3lık",
+                            "subtitle": "Detay Alt3 Başlık",
+                            "title_content": "Dety3 İçerik",
+                            "subtitle_content": "De3ty Alt İçerik",
+                            "videos": [
+                                "video31 url",
+                                "vid3eo2 url"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]

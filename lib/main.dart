@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trainee_path/constants/constants.dart';
+import 'package:trainee_path/views/auth/login_page.dart';
 import 'package:trainee_path/views/tabs/home/subtopics_page.dart';
 import 'package:trainee_path/views/tabs/main_page.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'TraineePath',
       theme: theme,
-      home: const SubTopicPage(),
+      home: const MainPage(),
     );
   }
 

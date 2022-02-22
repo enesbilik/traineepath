@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trainee_path/constants/constants.dart';
 import 'package:trainee_path/views/tabs/bookmark/bookmark_page.dart';
 import 'package:trainee_path/views/tabs/home/home_page.dart';
+import 'package:trainee_path/views/tabs/home/subtopics_page.dart';
 import 'package:trainee_path/views/tabs/profile/profile_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -16,6 +17,7 @@ class _MainPageState extends State<MainPage> {
     const HomePage(),
     const BookMark(),
     const ProfilePage(),
+    //const SubTopicPage(),
   ];
 
   int _currentIndex = 0;
