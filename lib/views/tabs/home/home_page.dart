@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:trainee_path/base/base_auth_view.dart';
 import 'package:trainee_path/constants/constants.dart';
 import 'package:trainee_path/constants/home_data.dart';
-import 'package:trainee_path/models/deparment_model.dart';
+import 'package:trainee_path/models/contents/deparment_model.dart';
 import 'package:trainee_path/widgets/custom_text_field.dart';
 import 'package:trainee_path/widgets/deparment_card.dart';
 

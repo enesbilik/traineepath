@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:trainee_path/constants/constants.dart';
-import 'package:trainee_path/models/deparment_model.dart';
+import 'package:trainee_path/models/contents/deparment_model.dart';
 import 'package:trainee_path/views/tabs/home/subtopic_page2.dart';
 import 'package:trainee_path/views/tabs/home/subtopics_page.dart';
 
@@ -66,7 +66,7 @@ class DeparmentCard extends StatelessWidget {
   Flexible get subTitle {
     return Flexible(
       child: Text(
-        "${department.step} Adımdan ${department.progress}’ini tamamladın12312",
+        "12 Adımdan 1’ini tamamladın12312",
         style: kTextStyleNormal.copyWith(fontSize: 16),
       ),
     );
@@ -95,7 +95,7 @@ class DeparmentCard extends StatelessWidget {
     );
   }
 
-  double get percent => department.progress / department.step;
+  double get percent => 0.5;
 
   Widget get linearProgress {
     return LinearPercentIndicator(

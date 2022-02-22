@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 import 'package:trainee_path/base/base_auth_view.dart';
 import 'package:trainee_path/constants/constants.dart';
-import 'package:trainee_path/models/subtopic_model.dart';
-import 'package:trainee_path/models/topic_model.dart';
+import 'package:trainee_path/models/contents/subtopic_model.dart';
+import 'package:trainee_path/models/contents/main_topic_model.dart';
 import 'package:trainee_path/widgets/topic_card.dart';
 
 class SubTopicPage extends StatefulWidget {
-  final String id;
+  final int id;
   const SubTopicPage({Key? key, required this.id}) : super(key: key);
 
   @override
@@ -21,8 +21,6 @@ class _SubTopicPageState extends BaseViewState<SubTopicPage> {
 
   @override
   void initState() {
-    setTopicRef();
-
     super.initState();
   }
 
@@ -68,8 +66,8 @@ class _SubTopicPageState extends BaseViewState<SubTopicPage> {
               scrollDirection: Axis.horizontal,
               itemCount: listOfTopics.length,
               itemBuilder: (BuildContext context, int index) {
-                TopicModel topicModel =
-                    TopicModel.fromMap(listOfTopics[index].data());
+                MainTopic topicModel =
+                    MainTopic.fromMap(listOfTopics[index].data());
                 return SizedBox(
                   width: dynamicHeight(0.19),
                   child: TopicCard(topicModel: topicModel),
@@ -99,8 +97,8 @@ class _SubTopicPageState extends BaseViewState<SubTopicPage> {
                   return const Divider(thickness: 0.7);
                 },
                 itemBuilder: (BuildContext context, int index) {
-                  SubTopicModel topicModel =
-                      SubTopicModel.fromMap(listOfSubTopics[index].data());
+                  SubTopic topicModel =
+                      SubTopic.fromMap(listOfSubTopics[index].data());
 
                   return ListTile(
                     onTap: () {},
@@ -116,12 +114,5 @@ class _SubTopicPageState extends BaseViewState<SubTopicPage> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       ),
     );
-  }
-
-  void setTopicRef() {
-    topicsReference = FirebaseFirestore.instance
-        .collection('DEPARTMENTS')
-        .doc(widget.id)
-        .collection("TOPICS");
   }
 }

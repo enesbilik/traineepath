@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:trainee_path/constants/constants.dart';
-import 'package:trainee_path/models/topic_model.dart';
+import 'package:trainee_path/models/contents/main_topic_model.dart';
 
 class TopicCard extends StatelessWidget {
-  final TopicModel topicModel;
+  final MainTopic topicModel;
   const TopicCard({
     Key? key,
     required this.topicModel,

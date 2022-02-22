@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:trainee_path/base/base_auth_view.dart';
 import 'package:trainee_path/constants/auth_data.dart';
 import 'package:trainee_path/constants/constants.dart';
-import 'package:trainee_path/models/user_model.dart';
+import 'package:trainee_path/models/users/user_model.dart';
 import 'package:trainee_path/utilities/utils.dart';
 import 'package:trainee_path/views/auth/let_sign_up_page.dart';
 import 'package:trainee_path/widgets/custom_button.dart';

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:drop_down_list/drop_down_list.dart';
 import 'package:flutter/services.dart';
-import 'package:trainee_path/models/university_model.dart';
+import 'package:trainee_path/models/universities/university_model.dart';
 
 class UniversityService {
   static final List<SelectedListItem> _universities = [];
