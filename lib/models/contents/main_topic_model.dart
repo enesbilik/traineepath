@@ -1,14 +1,20 @@
+// To parse this JSON data, do
+//
+//     final mainTopic = mainTopicFromMap(jsonString);
+
 import 'dart:convert';
 
 import 'package:trainee_path/models/contents/subtopic_model.dart';
 
 class MainTopic {
   MainTopic({
+    required this.id,
     required this.image,
     required this.title,
     required this.subTopics,
   });
 
+  final int id;
   final String image;
   final String title;
   final List<SubTopic> subTopics;
@@ -18,6 +24,7 @@ class MainTopic {
   String toJson() => json.encode(toMap());
 
   factory MainTopic.fromMap(Map<String, dynamic> json) => MainTopic(
+        id: json["id"],
         image: json["image"],
         title: json["title"],
         subTopics: List<SubTopic>.from(
@@ -25,6 +32,7 @@ class MainTopic {
       );
 
   Map<String, dynamic> toMap() => {
+        "id": id,
         "image": image,
         "title": title,
         "sub_topics": List<dynamic>.from(subTopics.map((x) => x.toMap())),

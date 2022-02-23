@@ -1,11 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:trainee_path/base/base_auth_view.dart';
 import 'package:trainee_path/constants/constants.dart';
 import 'package:trainee_path/constants/home_data.dart';
 import 'package:trainee_path/models/contents/deparment_model.dart';
+import 'package:trainee_path/services/http/department_service.dart';
 import 'package:trainee_path/widgets/custom_text_field.dart';
 import 'package:trainee_path/widgets/deparment_card.dart';
+import 'package:trainee_path/widgets/loading_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,13 +16,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends BaseViewState<HomePage> {
-  CollectionReference departmentReference =
-      FirebaseFirestore.instance.collection('DEPARTMENTS');
   late TextEditingController searchController;
+  late Future<List<DepartmentModel>> futureDepartments;
 
   @override
   void initState() {
     searchController = TextEditingController();
+    futureDepartments = DepartmentService.fetchDepartments();
+
     super.initState();
   }
 
@@ -50,42 +52,51 @@ class _HomePageState extends BaseViewState<HomePage> {
             ),
             //baseSpace3,
             departmentText,
+            buildDepartmentsCard(),
+
             //baseSpace3,
-            buildCards(),
+            //buildCards(),
           ],
         ),
       ),
     );
   }
 
-  StreamBuilder<QuerySnapshot<Object?>> buildCards() {
-    return StreamBuilder<QuerySnapshot>(
-        stream: departmentReference.snapshots(),
-        builder: (context, AsyncSnapshot snapshot) {
-          if (snapshot.data == null) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          List listOfDepartments = snapshot.data!.docs;
-
+  FutureBuilder<List<DepartmentModel>> buildDepartmentsCard() {
+    return FutureBuilder<List<DepartmentModel>>(
+      future: futureDepartments,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
           return SizedBox(
             height: dynamicHeight(0.35),
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: listOfDepartments.length,
-              itemBuilder: (BuildContext context, int index) {
-                DepartmentModel department =
-                    DepartmentModel.fromMap(listOfDepartments[index].data());
-                return SizedBox(
-                  width: dynamicHeight(0.32),
-                  child: DeparmentCard(department: department),
-                );
-              },
-            ),
+            child: buildListView(snapshot),
           );
-        });
+        } else if (snapshot.hasError) {
+          return const Center(
+            child: Text("Something went wrong"),
+          );
+        } else {
+          return SizedBox(
+            height: dynamicHeight(0.35),
+            child: const CustomLoading(),
+          );
+        }
+      },
+    );
+  }
+
+  ListView buildListView(AsyncSnapshot<List<DepartmentModel>> snapshot) {
+    return ListView.builder(
+      shrinkWrap: true,
+      scrollDirection: Axis.horizontal,
+      itemCount: snapshot.data!.length,
+      itemBuilder: (BuildContext context, int index) {
+        return SizedBox(
+          width: dynamicHeight(0.32),
+          child: DeparmentCard(department: snapshot.data![index]),
+        );
+      },
+    );
   }
 
   Align get departmentText {

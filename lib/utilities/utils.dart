@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:trainee_path/constants/api_key.dart';
 import 'package:trainee_path/constants/auth_data.dart';
+import 'package:trainee_path/constants/http_constants.dart';
 
 class Utils {
   static List<Widget> modelBuilder<M>(
@@ -38,5 +40,9 @@ class Utils {
     ScaffoldMessenger.of(context)
       ..removeCurrentSnackBar()
       ..showSnackBar(snackBar);
+  }
+
+  static String createUrl(String name) {
+    return "$baseUrl$name.json?auth=$API_KEY";
   }
 }

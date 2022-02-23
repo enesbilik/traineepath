@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trainee_path/constants/constants.dart';
 import 'package:trainee_path/views/tabs/bookmark/bookmark_page.dart';
-import 'package:trainee_path/views/tabs/home/home_page.dart';
+import 'package:trainee_path/views/tabs/home/departments_page.dart';
 import 'package:trainee_path/views/tabs/home/subtopics_page.dart';
 import 'package:trainee_path/views/tabs/profile/profile_page.dart';
 
