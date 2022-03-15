@@ -1,13 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:trainee_path/base/base_auth_view.dart';
+import 'package:trainee_path/base/base_view.dart';
 import 'package:trainee_path/constants/auth_data.dart';
 import 'package:trainee_path/constants/constants.dart';
+import 'package:trainee_path/route/route_manager.dart';
 import 'package:trainee_path/services/firebase/auth_service.dart';
 import 'package:trainee_path/utilities/utils.dart';
 import 'package:trainee_path/views/auth/sign_up_page.dart';
-import 'package:trainee_path/widgets/custom_button.dart';
-import 'package:trainee_path/widgets/custom_text_field.dart';
+import 'package:trainee_path/views/tabs/main_page.dart';
+import 'package:trainee_path/widgets/customs/custom_button.dart';
+import 'package:trainee_path/widgets/customs/custom_text_field.dart';
+
+import '../../route/routes.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -62,7 +66,7 @@ class _LoginPageState extends BaseViewState<LoginPage> {
                 controller: _passwordEditingController,
               ),
               const SizedBox(height: 2),
-              _getForgotPasswordButton(),
+              _getForgotPasswordButton(context),
               const Spacer(flex: 3),
               _isLoading
                   ? const CircularProgressIndicator()
@@ -85,30 +89,30 @@ class _LoginPageState extends BaseViewState<LoginPage> {
       children: [
         Text(
           AuthData.dontHaveAnAccount,
-          style: kForgotPasswordStyle,
+          style: kForgotPasswordStyle.copyWith(fontSize: dynamicFontSize(16)),
         ),
         TextButton(
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const SignUpPage()));
+            RouteManager.navigatePageNamed(context, AppRoute.SIGN);
           },
           child: Text(
             AuthData.dontHaveAnAccountButton,
-            style: kTextStyleBold.copyWith(fontSize: 16),
+            style: kTextStyleBold.copyWith(fontSize: dynamicFontSize(16)),
           ),
         ),
       ],
     );
   }
 
-  Widget _getForgotPasswordButton() {
+  Widget _getForgotPasswordButton(BuildContext context) {
     return Align(
       alignment: Alignment.topRight,
       child: TextButton(
         onPressed: () {},
         child: Text(
           AuthData.forgotPasswordText,
-          style: kForgotPasswordStyle,
+          style: kForgotPasswordStyle.copyWith(
+              fontSize: Utils.dynamicFontSize(context, 16)),
         ),
       ),
     );
@@ -122,7 +126,7 @@ class _LoginPageState extends BaseViewState<LoginPage> {
       ),
       child: Text(
         AuthData.topText,
-        style: kTextStyleNormal,
+        style: kTextStyleNormal.copyWith(fontSize: dynamicFontSize(22)),
         textAlign: TextAlign.center,
       ),
     );
@@ -145,15 +149,7 @@ class _LoginPageState extends BaseViewState<LoginPage> {
           _mailEditingController.text, _passwordEditingController.text);
 
       if (userCredential != null) {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const Scaffold(
-                      body: Center(
-                        child: Text("New Page"),
-                      ),
-                    )),
-            (route) => false);
+        RouteManager.navigatePageNamedRemove(context, AppRoute.MAIN);
       }
     } on FirebaseAuthException catch (e) {
       Utils.showSnackBar(context, e.message.toString());

@@ -36,7 +36,7 @@ class _DatePickerPageState extends State<DatePickerPage> {
                 Text(
                   AuthData.birthDayText + ' :',
                   style: kTextStyleNormal.copyWith(
-                    fontSize: 16,
+                    fontSize: Utils.dynamicFontSize(context, 16),
                     color: kTextColor,
                   ),
                 ),

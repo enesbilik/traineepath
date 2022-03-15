@@ -1,15 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:trainee_path/base/base_auth_view.dart';
+import 'package:trainee_path/base/base_view.dart';
 import 'package:trainee_path/constants/auth_data.dart';
 import 'package:trainee_path/constants/constants.dart';
 import 'package:trainee_path/models/users/user_model.dart';
 import 'package:trainee_path/services/firebase/auth_service.dart';
 import 'package:trainee_path/utilities/utils.dart';
 import 'package:trainee_path/views/auth/login_page.dart';
-import 'package:trainee_path/widgets/custom_button.dart';
-import 'package:trainee_path/widgets/custom_text_field.dart';
+import 'package:trainee_path/widgets/customs/custom_button.dart';
+import 'package:trainee_path/widgets/customs/custom_text_field.dart';
 
 class LetSignUpPage extends StatefulWidget {
   final UserModel myUser;
@@ -111,7 +111,7 @@ class _LetSignUpPageState extends BaseViewState<LetSignUpPage> {
   Text _getTopText() {
     return Text(
       AuthData.knowYouText,
-      style: kTextStyleBold.copyWith(fontSize: 22),
+      style: kTextStyleBold.copyWith(fontSize: dynamicFontSize(22)),
     );
   }
 

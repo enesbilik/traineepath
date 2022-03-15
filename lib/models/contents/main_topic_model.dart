@@ -37,4 +37,9 @@ class MainTopic {
         "title": title,
         "sub_topics": List<dynamic>.from(subTopics.map((x) => x.toMap())),
       };
+
+  @override
+  String toString() {
+    return 'MainTopic(id: $id, image: $image, title: $title, subTopics: $subTopics)';
+  }
 }

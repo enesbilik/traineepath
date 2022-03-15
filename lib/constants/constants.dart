@@ -17,7 +17,6 @@ const TextStyle kTextStyleBold = TextStyle(
 final TextStyle kTextStyleNormal = TextStyle(
   color: kTextColor.withOpacity(0.8),
   fontWeight: FontWeight.w400,
-  fontSize: 22,
 );
 
 final TextStyle kForgotPasswordStyle = TextStyle(

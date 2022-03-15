@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:trainee_path/base/base_auth_view.dart';
+import 'package:trainee_path/base/base_view.dart';
 import 'package:trainee_path/constants/constants.dart';
 import 'package:trainee_path/constants/home_data.dart';
 import 'package:trainee_path/models/contents/deparment_model.dart';
 import 'package:trainee_path/services/http/department_service.dart';
-import 'package:trainee_path/widgets/custom_text_field.dart';
-import 'package:trainee_path/widgets/deparment_card.dart';
-import 'package:trainee_path/widgets/loading_widget.dart';
+import 'package:trainee_path/widgets/customs/custom_text_field.dart';
+import 'package:trainee_path/widgets/cards/deparment_card.dart';
+import 'package:trainee_path/widgets/customs/custom_loading_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,14 +17,22 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends BaseViewState<HomePage> {
   late TextEditingController searchController;
-  late Future<List<DepartmentModel>> futureDepartments;
+  List<DepartmentModel> futureDepartments = [];
+  List<DepartmentModel> filteredDepartments = [];
 
   @override
   void initState() {
     searchController = TextEditingController();
-    futureDepartments = DepartmentService.fetchDepartments();
+    initData();
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+
+    super.dispose();
   }
 
   @override
@@ -48,52 +56,49 @@ class _HomePageState extends BaseViewState<HomePage> {
               icon: Icons.search,
               hintText: HomeData.searchHint,
               controller: searchController,
-              onChanged: (value) {},
+              onChanged: (value) {
+                _filterDepartments(value);
+              },
             ),
             //baseSpace3,
             departmentText,
             buildDepartmentsCard(),
 
             //baseSpace3,
-            //buildCards(),
           ],
         ),
       ),
     );
   }
 
-  FutureBuilder<List<DepartmentModel>> buildDepartmentsCard() {
-    return FutureBuilder<List<DepartmentModel>>(
-      future: futureDepartments,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return SizedBox(
-            height: dynamicHeight(0.35),
-            child: buildListView(snapshot),
-          );
-        } else if (snapshot.hasError) {
-          return const Center(
-            child: Text("Something went wrong"),
-          );
-        } else {
-          return SizedBox(
-            height: dynamicHeight(0.35),
-            child: const CustomLoading(),
-          );
-        }
-      },
+  Widget buildDepartmentsCard() {
+    return SizedBox(
+      height: dynamicHeight(0.35),
+      child: currentWidget,
     );
   }
 
-  ListView buildListView(AsyncSnapshot<List<DepartmentModel>> snapshot) {
+  Widget get currentWidget {
+    if (filteredDepartments.isNotEmpty) {
+      return buildListView();
+    } else if (isSerching && filteredDepartments.isEmpty) {
+      return const Center(
+        child: Text("Not Found"),
+      );
+    } else {
+      return const CustomLoading();
+    }
+  }
+
+  ListView buildListView() {
     return ListView.builder(
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,
-      itemCount: snapshot.data!.length,
+      itemCount: filteredDepartments.length,
       itemBuilder: (BuildContext context, int index) {
         return SizedBox(
           width: dynamicHeight(0.32),
-          child: DeparmentCard(department: snapshot.data![index]),
+          child: DeparmentCard(department: filteredDepartments[index]),
         );
       },
     );
@@ -103,7 +108,7 @@ class _HomePageState extends BaseViewState<HomePage> {
     return Align(
       child: Text(
         HomeData.departmentsText,
-        style: kTextStyleBold.copyWith(fontSize: 20),
+        style: kTextStyleBold.copyWith(fontSize: dynamicFontSize(20)),
       ),
       alignment: Alignment.topLeft,
     );
@@ -112,14 +117,32 @@ class _HomePageState extends BaseViewState<HomePage> {
   Text get subTitle {
     return Text(
       HomeData.deparmentSearchText,
-      style: kTextStyleNormal,
+      style: kTextStyleNormal.copyWith(fontSize: dynamicFontSize(22)),
     );
   }
 
   Text get title {
     return Text(
       "${HomeData.helloText} Enes!",
-      style: kTextStyleBold.copyWith(fontSize: 32),
+      style: kTextStyleBold.copyWith(fontSize: dynamicFontSize(32)),
     );
+  }
+
+  void _filterDepartments(value) {
+    setState(() {
+      filteredDepartments = futureDepartments
+          .where((department) =>
+              department.title.toLowerCase().contains(value.toLowerCase()))
+          .toList();
+    });
+  }
+
+  bool get isSerching => searchController.text.isNotEmpty;
+  void initData() {
+    DepartmentService.fetchDepartments().then((data) {
+      setState(() {
+        futureDepartments = filteredDepartments = data;
+      });
+    });
   }
 }

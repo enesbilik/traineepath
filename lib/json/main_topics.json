@@ -1,21 +1,33 @@
 [
     {
         "id": 12,
-        "image": "İmage1 url",
+        "image": "İmage 12",
         "title": "Anatomi1",
         "sub_topics": [
             {
-                "title": "Tıp ve Sanat1",
-                "subtitle": "Tıp sanat mıdır?1",
+                "title": "Protez Diş Türleri Nelerdir?",
+                "subtitle": "sub title",
                 "content": {
-                    "title": "Detay Başlık",
+                    "image": "image url",
+                    "mainTitle": "main title",
+                    "title": "Protez Diş Türleri Nelerdir?",
                     "subtitle": "Detay Alt Başlık",
-                    "title_content": "Dety İçerik",
-                    "subtitle_content": "Dety Alt İçerik",
-                    "videos": [
-                        "video1 url",
-                        "video2 url"
-                    ]
+                    "titleContent": "Dişler, sindirim sisteminin önemli bir parçasıdır ve insan sağlığı için son derece önemlidir. Diş protezleri diş tedavisinde son seçenek olmalı ve genellikle diş kaybına neden olan durumlarda (diş çürüğü, kırık dişler veya yetersiz dolgu gibi) kullanılmalıdır. Yani dişlerdeki rahatsızlığın boyutu uygulanan tedavi ile düzeltilemiyorsa kişi protez tedavisinden faydalanabilir. Protez uygulamasında kişilerin var olan sağlıklı dişlerinin korunması çok önemlidir. Genellikle sabit ve hareketli olmak üzere iki farklı protez türü vardır.",
+                    "subtitleContent": "Dety Alt İçerik",
+                    "video": "video1 url"
+                }
+            },
+            {
+                "title": "Protez Diş Nedir?",
+                "subtitle": "",
+                "content": {
+                    "image": "image url",
+                    "mainTitle": "main title",
+                    "title": "Protez Diş Nedir?",
+                    "subtitle": "Detay Alt Başlık",
+                    "titleContent": "Kaybedilen dişlerin yerini alan protezler kişiye özel üretilir. Hastanın kişisel ihtiyacına göre üretilen protezler hastanın ağzına tam oturmalı, doğal görünmeli ve kullanımı kolay fonksiyonlara sahip olmalıdır. Diş restorasyonları, bir veya daha fazla eksik dişi veya tüm dişleri değiştirmek için kullanılabilir. Ancak protez uygulamalarında en önemlisi hastanın ağzında kalan mevcut dişlerin korunmasıdır. Protezler insan kemiklerinin rengine en uygun tonlarda üretilir. Bu nedenle insan protezlerinin rengi doğal bir görünüme sahiptir. Protez uygulamasının temel amacı, kaybedilen çiğneme fonksiyonunun eski haline getirilmesidir. Çiğneme veriminin geri kazanılmasıyla birlikte yaşam kalitesi de artmıştır. Tüm bunların yanında kırılan dişlerin psikolojik etkileri, renk değişikliği veya deformasyonu da ortadan kaldırılır.",
+                    "subtitleContent": "Dety Alt İçerik",
+                    "video": "video1 url"
                 }
             }
         ]
@@ -29,14 +41,26 @@
                 "title": "Tıp ve Sanat2",
                 "subtitle": "Tıp sanat mıdır2?",
                 "content": {
+                    "image": "image url",
+                    "mainTitle": "main title",
                     "title": "Detay Başl2ık",
                     "subtitle": "Detay Alt 2Başlık",
-                    "title_content": "Dety 2İçerik",
-                    "subtitle_content": "Dety2 Alt İçerik",
-                    "videos": [
-                        "video2 url",
-                        "video2 url"
-                    ]
+                    "titleContent": "Dety 2İçerik",
+                    "subtitleContent": "Dety2 Alt İçerik",
+                    "video": "video2 url"
+                }
+            },
+            {
+                "title": "Data Değişti",
+                "subtitle": "Tıp sanat mıdır2?",
+                "content": {
+                    "image": "image url",
+                    "mainTitle": "main title",
+                    "title": "Detay Başl2ık",
+                    "subtitle": "Detay Alt 2Başlık",
+                    "titleContent": "Dety 2İçerik",
+                    "subtitleContent": "Dety2 Alt İçerik",
+                    "video": "dds url"
                 }
             }
         ]
@@ -50,14 +74,13 @@
                 "title": "Tıp ve Sanat2",
                 "subtitle": "Tıp sanat mıdır2?",
                 "content": {
+                    "image": "image url",
+                    "mainTitle": "main title",
                     "title": "Detay Başl2ık",
                     "subtitle": "Detay Alt 2Başlık",
-                    "title_content": "Dety 2İçerik",
-                    "subtitle_content": "Dety2 Alt İçerik",
-                    "videos": [
-                        "video2 url",
-                        "video2 url"
-                    ]
+                    "titleContent": "Dety 2İçerik",
+                    "subtitleContent": "Dety2 Alt İçerik",
+                    "video": "video2 url"
                 }
             }
         ]
@@ -71,14 +94,13 @@
                 "title": "Tıp v3e Sanat",
                 "subtitle": "Tıp sana3t mıdır?",
                 "content": {
+                    "image": "image url",
+                    "mainTitle": "main title",
                     "title": "Detay B3aş3lık",
                     "subtitle": "Detay Alt3 Başlık",
-                    "title_content": "Dety3 İçerik",
-                    "subtitle_content": "De3ty Alt İçerik",
-                    "videos": [
-                        "video31 url",
-                        "vid3eo2 url"
-                    ]
+                    "titleContent": "Dety3 İçerik",
+                    "subtitleContent": "De3ty Alt İçerik",
+                    "video": "video31 url"
                 }
             }
         ]
@@ -92,14 +114,13 @@
                 "title": "Tıp ve Sanat2",
                 "subtitle": "Tıp sanat mıdır2?",
                 "content": {
+                    "image": "image url",
+                    "mainTitle": "main title",
                     "title": "Detay Başl2ık",
                     "subtitle": "Detay Alt 2Başlık",
-                    "title_content": "Dety 2İçerik",
-                    "subtitle_content": "Dety2 Alt İçerik",
-                    "videos": [
-                        "video2 url",
-                        "video2 url"
-                    ]
+                    "titleContent": "Dety 2İçerik",
+                    "subtitleContent": "Dety2 Alt İçerik",
+                    "video": "video2 url"
                 }
             }
         ]
@@ -113,14 +134,13 @@
                 "title": "Tıp ve Sanat2",
                 "subtitle": "Tıp sanat mıdır2?",
                 "content": {
+                    "image": "image url",
+                    "mainTitle": "main title",
                     "title": "Detay Başl2ık",
                     "subtitle": "Detay Alt 2Başlık",
-                    "title_content": "Dety 2İçerik",
-                    "subtitle_content": "Dety2 Alt İçerik",
-                    "videos": [
-                        "video2 url",
-                        "video2 url"
-                    ]
+                    "titleContent": "Dety 2İçerik",
+                    "subtitleContent": "Dety2 Alt İçerik",
+                    "video": "video2 url"
                 }
             }
         ]
@@ -134,14 +154,13 @@
                 "title": "Tıp ve Sanat2",
                 "subtitle": "Tıp sanat mıdır2?",
                 "content": {
+                    "image": "image url",
+                    "mainTitle": "main title",
                     "title": "Detay Başl2ık",
                     "subtitle": "Detay Alt 2Başlık",
-                    "title_content": "Dety 2İçerik",
-                    "subtitle_content": "Dety2 Alt İçerik",
-                    "videos": [
-                        "video2 url",
-                        "video2 url"
-                    ]
+                    "titleContent": "Dety 2İçerik",
+                    "subtitleContent": "Dety2 Alt İçerik",
+                    "video": "video2 url"
                 }
             }
         ]

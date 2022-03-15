@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:trainee_path/constants/constants.dart';
+import 'package:trainee_path/utilities/utils.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -34,8 +35,8 @@ class CustomButton extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               text,
-              style: const TextStyle(
-                fontSize: 16,
+              style: TextStyle(
+                fontSize: Utils.dynamicFontSize(context, 16),
                 fontWeight: FontWeight.w500,
                 color: Colors.white,
                 letterSpacing: 0.4,

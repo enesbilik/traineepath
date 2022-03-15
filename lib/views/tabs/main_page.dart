@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:trainee_path/constants/constants.dart';
+import 'package:trainee_path/views/tabs/profile/profile_page.dart';
 import 'package:trainee_path/views/tabs/bookmark/bookmark_page.dart';
 import 'package:trainee_path/views/tabs/home/departments_page.dart';
-import 'package:trainee_path/views/tabs/home/subtopics_page.dart';
-import 'package:trainee_path/views/tabs/profile/profile_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -27,6 +26,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       //appBar: AppBar(),
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: kPrimary,
         selectedFontSize: 14,
         unselectedFontSize: 14,
         currentIndex: _currentIndex,
@@ -48,9 +48,7 @@ class _MainPageState extends State<MainPage> {
         BottomNavigationBarItem(
           icon: Icon(Icons.home_outlined),
           label: "Ana sayfa",
-          activeIcon: Icon(
-            Icons.home,
-          ),
+          activeIcon: Icon(Icons.home),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.bookmark_outline),

@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:trainee_path/constants/constants.dart';
+import 'package:trainee_path/views/auth/let_sign_up_page.dart';
 import 'package:trainee_path/views/auth/login_page.dart';
-import 'package:trainee_path/views/tabs/home/subtopics_page.dart';
+import 'package:trainee_path/views/auth/sign_up_page.dart';
 import 'package:trainee_path/views/tabs/main_page.dart';
+import 'route/routes.dart';
+import 'theme/app_theme.dart';
+import 'widgets/cards/youtube_player.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,22 +22,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TraineePath',
-      theme: theme,
-      home: const MainPage(),
-    );
-  }
-
-  ThemeData get theme {
-    return ThemeData(
-      primaryColor: kPrimary,
-      appBarTheme: const AppBarTheme(
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: IconThemeData(
-          color: kPrimary,
-        ),
-      ),
+      theme: AppTheme.lightTheme,
+      initialRoute: '/home',
+      routes: {
+        AppRoute.MAIN: (context) => const MainPage(),
+        AppRoute.LOGIN: (context) => const LoginPage(),
+        AppRoute.SIGN: (context) => const SignUpPage(),
+      },
     );
   }
 }

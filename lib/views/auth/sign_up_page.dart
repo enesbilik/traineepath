@@ -1,14 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:trainee_path/base/base_auth_view.dart';
+import 'package:trainee_path/base/base_view.dart';
 import 'package:trainee_path/constants/auth_data.dart';
 import 'package:trainee_path/constants/constants.dart';
 import 'package:trainee_path/models/users/user_model.dart';
 import 'package:trainee_path/utilities/utils.dart';
 import 'package:trainee_path/views/auth/let_sign_up_page.dart';
-import 'package:trainee_path/widgets/custom_button.dart';
-import 'package:trainee_path/widgets/custom_text_field.dart';
-import 'package:trainee_path/widgets/custom_date_picker.dart';
+import 'package:trainee_path/widgets/customs/custom_button.dart';
+import 'package:trainee_path/widgets/customs/custom_text_field.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -112,15 +110,15 @@ class _SignUpPageState extends BaseViewState<SignUpPage> {
   Text _getTopText() {
     return Text(
       AuthData.createNewAccount,
-      style: kTextStyleBold.copyWith(fontSize: 22),
+      style: kTextStyleBold.copyWith(fontSize: dynamicFontSize(22)),
     );
   }
 
   Widget _getSubText() {
-    return const Text(
+    return Text(
       AuthData.createNewAccountSub,
       style: TextStyle(
-        fontSize: 16,
+        fontSize: dynamicFontSize(16),
         color: kTextColor,
         fontWeight: FontWeight.normal,
       ),

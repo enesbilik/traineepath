@@ -13,6 +13,7 @@ class MainTopicService {
   MainTopicService._internal();
 
   static String url = Utils.createUrl("main_topics");
+
   static Future<List<MainTopic>> fetchTopics() async {
     final response = await http.get(Uri.parse(url));
 
@@ -21,7 +22,7 @@ class MainTopicService {
 
       return parsed.map<MainTopic>((json) => MainTopic.fromMap(json)).toList();
     } else {
-      throw Exception('Failed to load album');
+      throw Exception('Failed to load data');
     }
   }
 }

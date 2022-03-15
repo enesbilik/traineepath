@@ -45,4 +45,10 @@ class Utils {
   static String createUrl(String name) {
     return "$baseUrl$name.json?auth=$API_KEY";
   }
+
+  static double dynamicFontSize(BuildContext context, double fontSize) {
+    Size size = MediaQuery.of(context).size;
+    double result = (size.height * size.width * fontSize / 396328.0);
+    return result < 14 ? result * 1.2 : result;
+  }
 }

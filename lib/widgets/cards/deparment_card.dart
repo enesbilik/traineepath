@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:trainee_path/constants/constants.dart';
 import 'package:trainee_path/models/contents/deparment_model.dart';
+import 'package:trainee_path/utilities/utils.dart';
 import 'package:trainee_path/views/tabs/home/main_topics_page.dart';
-import 'package:trainee_path/views/tabs/home/subtopics_page.dart';
 
 class DeparmentCard extends StatelessWidget {
   final DepartmentModel department;
@@ -35,7 +35,7 @@ class DeparmentCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Expanded(flex: 3, child: bgImage),
-                  Expanded(flex: 5, child: cardTexts),
+                  Expanded(flex: 5, child: cardTexts(context)),
                 ],
               )
             ],
@@ -45,18 +45,18 @@ class DeparmentCard extends StatelessWidget {
     );
   }
 
-  Padding get cardTexts {
+  Padding cardTexts(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          title,
+          title(context),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              subTitle,
+              subTitle(context),
               linearProgress,
             ],
           ),
@@ -65,31 +65,32 @@ class DeparmentCard extends StatelessWidget {
     );
   }
 
-  Flexible get subTitle {
+  Flexible subTitle(BuildContext context) {
     return Flexible(
       child: Text(
         "${department.topics.length} Adımdan 5’ini tamamladın.",
-        style: kTextStyleNormal.copyWith(fontSize: 16),
+        style: kTextStyleNormal.copyWith(
+            fontSize: Utils.dynamicFontSize(context, 16)),
       ),
     );
   }
 
-  Text get title {
+  Text title(BuildContext context) {
     return Text(
       department.title,
-      style: kTextStyleBold.copyWith(fontSize: 22),
+      style:
+          kTextStyleBold.copyWith(fontSize: Utils.dynamicFontSize(context, 22)),
     );
   }
 
   Widget get bgImage {
     return Ink(
       width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius:
-            const BorderRadius.vertical(top: Radius.circular(_circular)),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(_circular)),
         image: DecorationImage(
           image: AssetImage(
-            department.image,
+            "assets/images/image3.jpg",
           ),
           fit: BoxFit.cover,
         ),

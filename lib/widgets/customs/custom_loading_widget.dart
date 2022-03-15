@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trainee_path/constants/constants.dart';
 
 class CustomLoading extends StatelessWidget {
   const CustomLoading({Key? key}) : super(key: key);
@@ -6,7 +7,9 @@ class CustomLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: CircularProgressIndicator(),
+      child: CircularProgressIndicator(
+        color: kPrimary,
+      ),
     );
   }
 }

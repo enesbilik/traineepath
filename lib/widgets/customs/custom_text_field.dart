@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:trainee_path/constants/constants.dart';
+import 'package:trainee_path/utilities/utils.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hintText;
@@ -25,14 +26,20 @@ class CustomTextField extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: TextField(
+        cursorColor: kPrimary,
         onChanged: onChanged,
         controller: controller,
         autocorrect: false,
         keyboardType: keyboardType,
         obscureText: isObscure,
-        style: const TextStyle(fontSize: 18),
+        style: TextStyle(fontSize: Utils.dynamicFontSize(context, 18)),
         decoration: InputDecoration(
-          suffixIcon: icon != null ? Icon(icon) : null,
+          suffixIcon: icon != null
+              ? Icon(
+                  icon,
+                  color: kPrimary,
+                )
+              : null,
           suffixIconColor: kHintTextColor.withOpacity(0.3),
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 20,

@@ -13,6 +13,7 @@ class DepartmentService {
   DepartmentService._internal();
 
   static String url = Utils.createUrl("departments");
+
   static Future<List<DepartmentModel>> fetchDepartments() async {
     final response = await http.get(Uri.parse(url));
 
@@ -23,7 +24,7 @@ class DepartmentService {
           .map<DepartmentModel>((json) => DepartmentModel.fromMap(json))
           .toList();
     } else {
-      throw Exception('Failed to load album');
+      throw Exception('Failed to load data');
     }
   }
 }
