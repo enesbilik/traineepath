@@ -21,6 +21,7 @@ class AuthService {
 
     if (userCredential.user != null) {
       _user.userId = userCredential.user!.uid;
+      await userCredential.user!.updateDisplayName(_user.name);
       await _firebaseFirestore
           .collection("USERS")
           .doc(_user.userId)

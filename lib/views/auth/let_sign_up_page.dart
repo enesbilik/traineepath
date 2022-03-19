@@ -1,15 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:trainee_path/base/base_view.dart';
-import 'package:trainee_path/constants/auth_data.dart';
-import 'package:trainee_path/constants/constants.dart';
-import 'package:trainee_path/models/users/user_model.dart';
-import 'package:trainee_path/services/firebase/auth_service.dart';
-import 'package:trainee_path/utilities/utils.dart';
-import 'package:trainee_path/views/auth/login_page.dart';
-import 'package:trainee_path/widgets/customs/custom_button.dart';
-import 'package:trainee_path/widgets/customs/custom_text_field.dart';
+
+import '../../base/base_view.dart';
+import '../../constants/auth_data.dart';
+import '../../constants/constants.dart';
+import '../../models/users/user_model.dart';
+import '../../route/route_manager.dart';
+import '../../route/routes.dart';
+import '../../services/firebase/auth_service.dart';
+import '../../utilities/utils.dart';
+import '../../widgets/customs/custom_button.dart';
+import '../../widgets/customs/custom_loading_widget.dart';
+import '../../widgets/customs/custom_text_field.dart';
 
 class LetSignUpPage extends StatefulWidget {
   final UserModel myUser;
@@ -75,7 +78,7 @@ class _LetSignUpPageState extends BaseViewState<LetSignUpPage> {
               baseSpace2,
               const Spacer(),
               _isLoading
-                  ? const CircularProgressIndicator()
+                  ? const CustomLoading()
                   : CustomButton(
                       text: AuthData.doneProfile, click: _registerMethod),
               SizedBox(height: dynamicHeight(0.15)),
@@ -122,17 +125,16 @@ class _LetSignUpPageState extends BaseViewState<LetSignUpPage> {
           await AuthService.register(widget.myUser, widget.password);
 
       if (userCredential != null) {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => const LoginPage()),
-            (route) => false);
+        RouteManager.navigatePageNamedRemove(
+          context: context,
+          routeName: AppRoute.LOGIN,
+        );
+
         Utils.showSnackBar(
             context, "Kullanıcı başarılı bir şekilde oluşturuldu");
       }
     } on FirebaseAuthException catch (e) {
       Utils.showSnackBar(context, e.message.toString());
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //     SnackBar(content: Text(e.message.toString())));
     }
     _changeLoading();
   }

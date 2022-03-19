@@ -1,17 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:trainee_path/base/base_view.dart';
-import 'package:trainee_path/constants/auth_data.dart';
-import 'package:trainee_path/constants/constants.dart';
-import 'package:trainee_path/route/route_manager.dart';
-import 'package:trainee_path/services/firebase/auth_service.dart';
-import 'package:trainee_path/utilities/utils.dart';
-import 'package:trainee_path/views/auth/sign_up_page.dart';
-import 'package:trainee_path/views/tabs/main_page.dart';
-import 'package:trainee_path/widgets/customs/custom_button.dart';
-import 'package:trainee_path/widgets/customs/custom_text_field.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../base/base_view.dart';
+import '../../constants/auth_data.dart';
+import '../../constants/constants.dart';
+import '../../constants/pref_keys.dart';
+import '../../route/route_manager.dart';
 import '../../route/routes.dart';
+import '../../services/firebase/auth_service.dart';
+import '../../utilities/utils.dart';
+import '../../widgets/customs/custom_button.dart';
+import '../../widgets/customs/custom_loading_widget.dart';
+import '../../widgets/customs/custom_text_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -69,7 +70,7 @@ class _LoginPageState extends BaseViewState<LoginPage> {
               _getForgotPasswordButton(context),
               const Spacer(flex: 3),
               _isLoading
-                  ? const CircularProgressIndicator()
+                  ? const CustomLoading()
                   : CustomButton(
                       text: AuthData.logInText,
                       click: _signInMethod,
@@ -149,12 +150,16 @@ class _LoginPageState extends BaseViewState<LoginPage> {
           _mailEditingController.text, _passwordEditingController.text);
 
       if (userCredential != null) {
-        RouteManager.navigatePageNamedRemove(context, AppRoute.MAIN);
+        setLoginState();
+
+        RouteManager.navigatePageNamedRemove(
+          context: context,
+          routeName: AppRoute.MAIN,
+          args: userCredential.user!.displayName,
+        );
       }
     } on FirebaseAuthException catch (e) {
       Utils.showSnackBar(context, e.message.toString());
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //     SnackBar(content: Text(e.message.toString())));
     }
     _changeLoading();
   }
@@ -163,5 +168,10 @@ class _LoginPageState extends BaseViewState<LoginPage> {
     setState(() {
       _isLoading = !_isLoading;
     });
+  }
+
+  void setLoginState() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.setBool(PrefKeys.ISLOGGED.toString(), true);
   }
 }

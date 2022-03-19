@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:trainee_path/base/base_view.dart';
-import 'package:trainee_path/constants/constants.dart';
-import 'package:trainee_path/constants/home_data.dart';
-import 'package:trainee_path/models/contents/deparment_model.dart';
-import 'package:trainee_path/services/http/department_service.dart';
-import 'package:trainee_path/widgets/customs/custom_text_field.dart';
-import 'package:trainee_path/widgets/cards/deparment_card.dart';
-import 'package:trainee_path/widgets/customs/custom_loading_widget.dart';
+
+import '../../../base/base_view.dart';
+import '../../../constants/constants.dart';
+import '../../../constants/home_data.dart';
+import '../../../models/contents/deparment_model.dart';
+import '../../../services/http/department_service.dart';
+import '../../../widgets/cards/deparment_card.dart';
+import '../../../widgets/customs/custom_loading_widget.dart';
+import '../../../widgets/customs/custom_text_field.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -43,12 +44,11 @@ class _HomePageState extends BaseViewState<HomePage> {
         height: dynamicHeight(0.9),
         padding: basePadding,
         child: Column(
-          //mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             baseSpace3,
-            title,
+            title('display name'),
             //baseSpace1,
             subTitle,
             //baseSpace3,
@@ -121,9 +121,9 @@ class _HomePageState extends BaseViewState<HomePage> {
     );
   }
 
-  Text get title {
+  Text title(String name) {
     return Text(
-      "${HomeData.helloText} Enes!",
+      "${HomeData.helloText} $name!",
       style: kTextStyleBold.copyWith(fontSize: dynamicFontSize(32)),
     );
   }
