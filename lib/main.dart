@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:trainee_path/deneme.dart';
+import 'package:trainee_path/route/navigation_service.dart';
+import 'package:trainee_path/views/onboard/view/on_board_view.dart';
 
 import 'route/routes.dart';
 import 'theme/app_theme.dart';
@@ -18,20 +19,21 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  final bool isLogged = true;
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      //home: const OnBoardView(),
       debugShowCheckedModeBanner: false,
       title: 'TraineePath',
       theme: AppTheme.lightTheme,
       initialRoute: AppRoute.SPLASH,
+      navigatorKey: NavigationService.instance.navigatorKey,
       routes: {
         AppRoute.MAIN: (context) => const MainPage(),
         AppRoute.LOGIN: (context) => const LoginPage(),
         AppRoute.SIGN: (context) => const SignUpPage(),
         AppRoute.SPLASH: (context) => const SplashPage(),
+        AppRoute.ON_BOARD: (context) => const OnBoardView(),
       },
     );
   }

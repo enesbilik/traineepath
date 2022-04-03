@@ -16,6 +16,7 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends BaseState<SplashPage> {
   late bool isLogged;
+  late bool isFirst;
 
   @override
   void initState() {
@@ -35,14 +36,17 @@ class _SplashPageState extends BaseState<SplashPage> {
     final SharedPreferences pref = await SharedPreferences.getInstance();
 
     isLogged = pref.getBool(PreferencesKeys.ISLOGGED.toString()) ?? false;
+    isFirst = pref.getBool(PreferencesKeys.IS_FIRST_APP.toString()) ?? true;
+    print(isFirst);
 
-    RouteManager.navigatePageNamedRemove(
-      context: context,
-      routeName: isLogged ? AppRoute.MAIN : AppRoute.LOGIN,
-    );
+    if (isFirst) {
+      RouteManager.navigatePageNamedRemove(
+          context: context, routeName: AppRoute.ON_BOARD);
+    } else {
+      RouteManager.navigatePageNamedRemove(
+        context: context,
+        routeName: isLogged ? AppRoute.MAIN : AppRoute.LOGIN,
+      );
+    }
   }
 }
-
-
-
-//TODO kullanıcıdan görüş bildirisi

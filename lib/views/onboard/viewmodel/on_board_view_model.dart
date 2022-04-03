@@ -16,9 +16,6 @@ abstract class _OnBoardViewModelBase with Store, BaseViewModel {
   List<OnBoardModel> onBoardItems = [];
 
   @observable
-  bool isLoading = false;
-
-  @observable
   int currentIndex = 0;
 
   @action
@@ -28,23 +25,33 @@ abstract class _OnBoardViewModelBase with Store, BaseViewModel {
 
   @override
   void init() {
-    // onBoardItems.add(OnBoardModel(LocaleKeys.onBoard_page1_title,
-    //     LocaleKeys.onBoard_page1_desc, SVGImagePaths.instance.astronautSVG));
-    // onBoardItems.add(OnBoardModel(LocaleKeys.onBoard_page2_title,
-    //     LocaleKeys.onBoard_page2_desc, SVGImagePaths.instance.chattingSVG));
-    // onBoardItems.add(OnBoardModel(LocaleKeys.onBoard_page3_title,
-    //     LocaleKeys.onBoard_page3_desc, SVGImagePaths.instance.relaxSVG));
-  }
-
-  @action
-  void changeLoading() {
-    isLoading = !isLoading;
+    onBoardItems.add(
+      OnBoardModel(
+        'Meslek seçimi hayatındaki en önemli kararlardan biri',
+        'Kafanın karışık olduğu bir konu olabilir, ancak TraineePath yanında',
+        'assets/images/on_board1.png',
+      ),
+    );
+    onBoardItems.add(
+      OnBoardModel(
+        'Programları deneyimleyerek keşfet!',
+        'Her bölüme özel yapıda olan adımları yaşayarak, program içeriklerini öğren.',
+        'assets/images/on_board2.png',
+      ),
+    );
+    onBoardItems.add(
+      OnBoardModel(
+        'TraineePath1',
+        'Deneyimlediğin mesleği ileri taşıyan ilham veren kişileri ve olayları keşfet! ',
+        'assets/images/on_board3.png',
+      ),
+    );
   }
 
   Future<void> completeToOnBoard() async {
-    changeLoading();
-    await localeManager.setBoolValue(PreferencesKeys.IS_FIRST_APP, true);
-    changeLoading();
+    await localeManager.setBoolValue(PreferencesKeys.IS_FIRST_APP, false);
+    var deneme = localeManager.getBoolValue(PreferencesKeys.IS_FIRST_APP);
+    print(deneme);
     if (navigation.navigatorKey.currentState!.canPop()) {
       navigation.navigatorKey.currentState!.pop();
     } else {
