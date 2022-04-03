@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trainee_path/base/base_view.dart';
+import 'package:trainee_path/base/base_state.dart';
 import 'package:trainee_path/constants/auth_data.dart';
 import 'package:trainee_path/constants/constants.dart';
 import 'package:trainee_path/models/users/user_model.dart';
@@ -15,7 +15,7 @@ class SignUpPage extends StatefulWidget {
   _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends BaseViewState<SignUpPage> {
+class _SignUpPageState extends BaseState<SignUpPage> {
   late TextEditingController _nameEditingController;
   late TextEditingController _surnameEditingController;
   late TextEditingController _phoneNumberEditingController;

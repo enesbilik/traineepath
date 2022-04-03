@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:trainee_path/base/base_view.dart';
-import 'package:trainee_path/constants/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trainee_path/route/route_manager.dart';
+import 'package:trainee_path/services/firebase/auth_service.dart';
+
+import '../../../base/base_state.dart';
+import '../../../constants/constants.dart';
+import '../../../constants/pref_keys.dart';
+import '../../../route/routes.dart';
+
+//TODO: Sevdi ile toplantı ayarla
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -10,7 +18,7 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends BaseViewState<ProfilePage> {
+class _ProfilePageState extends BaseState<ProfilePage> {
   int _selectedButton = 0;
   @override
   Widget build(BuildContext context) {
@@ -31,6 +39,14 @@ class _ProfilePageState extends BaseViewState<ProfilePage> {
       onPressed: () {},
       child: const Icon(Icons.edit),
     );
+  }
+
+  void setLoginState() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.setBool(PreferencesKeys.ISLOGGED.toString(), false);
+    AuthService().signOut();
+    RouteManager.navigatePageNamedRemove(
+        context: context, routeName: AppRoute.LOGIN);
   }
 
   Widget _buildBody() {
@@ -110,7 +126,10 @@ class _ProfilePageState extends BaseViewState<ProfilePage> {
     return AppBar(
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            print("user out");
+            setLoginState();
+          },
           icon: const Icon(
             Icons.settings,
           ),

@@ -1,25 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:mobx/mobx.dart';
 
-abstract class BaseViewState<T extends StatefulWidget> extends State<T> {
-  double dynamicHeight(double value) =>
-      MediaQuery.of(context).size.height * value;
+class BaseView<T extends Store> extends StatefulWidget {
+  final Widget Function(BuildContext context, T value) onPageBuilder;
+  final T viewModel;
+  final Function(T model) onModelReady;
+  final VoidCallback? onDispose;
 
-  double dynamicWidth(double value) =>
-      MediaQuery.of(context).size.width * value;
+  const BaseView(
+      {Key? key,
+      required this.viewModel,
+      required this.onPageBuilder,
+      required this.onModelReady,
+      this.onDispose})
+      : super(key: key);
 
-  EdgeInsets get basePadding => const EdgeInsets.all(16);
+  @override
+  _BaseViewState<T> createState() => _BaseViewState<T>();
+}
 
-  SizedBox get quarterHeight => SizedBox(
-        height: dynamicHeight(0.1),
-      );
-
-  double dynamicFontSize(double fontSize) {
-    double result = dynamicHeight(1) * dynamicWidth(1) * fontSize / 396328.0;
-    return result < 14 ? result * 1.2 : result;
+class _BaseViewState<T extends Store> extends State<BaseView<T>> {
+  late T model;
+  @override
+  void initState() {
+    model = widget.viewModel;
+    widget.onModelReady(model);
+    super.initState();
   }
 
-  SizedBox get baseSpace0 => const SizedBox(height: 12);
-  SizedBox get baseSpace1 => const SizedBox(height: 20);
-  SizedBox get baseSpace2 => const SizedBox(height: 32);
-  SizedBox get baseSpace3 => const SizedBox(height: 44);
+  @override
+  void dispose() {
+    super.dispose();
+    if (widget.onDispose != null) widget.onDispose!();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.onPageBuilder(context, model);
+  }
 }

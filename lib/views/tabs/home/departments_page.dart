@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../base/base_view.dart';
+import '../../../base/base_state.dart';
 import '../../../constants/constants.dart';
 import '../../../constants/home_data.dart';
 import '../../../models/contents/deparment_model.dart';
@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends BaseViewState<HomePage> {
+class _HomePageState extends BaseState<HomePage> {
   late TextEditingController searchController;
   List<DepartmentModel> futureDepartments = [];
   List<DepartmentModel> filteredDepartments = [];
@@ -48,7 +48,7 @@ class _HomePageState extends BaseViewState<HomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             baseSpace3,
-            title('display name'),
+            title('Enes'),
             //baseSpace1,
             subTitle,
             //baseSpace3,

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:trainee_path/constants/constants.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../../base/base_view.dart';
+import '../../base/base_state.dart';
 
 /// Homepage
 class YoutubePlayerCard extends StatefulWidget {
@@ -14,7 +14,7 @@ class YoutubePlayerCard extends StatefulWidget {
   _YoutubePlayerCardState createState() => _YoutubePlayerCardState();
 }
 
-class _YoutubePlayerCardState extends BaseViewState<YoutubePlayerCard> {
+class _YoutubePlayerCardState extends BaseState<YoutubePlayerCard> {
   late YoutubePlayerController _controller;
 
   late YoutubeMetaData _videoMetaData;

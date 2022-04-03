@@ -2,15 +2,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../base/base_view.dart';
+import '../../base/base_state.dart';
 import '../../constants/auth_data.dart';
 import '../../constants/constants.dart';
 import '../../models/users/user_model.dart';
 import '../../route/route_manager.dart';
 import '../../route/routes.dart';
 import '../../services/firebase/auth_service.dart';
+import '../../temp_data/universities.dart';
 import '../../utilities/utils.dart';
 import '../../widgets/customs/custom_button.dart';
+import '../../widgets/customs/custom_item_picker.dart';
 import '../../widgets/customs/custom_loading_widget.dart';
 import '../../widgets/customs/custom_text_field.dart';
 
@@ -24,7 +26,7 @@ class LetSignUpPage extends StatefulWidget {
   _LetSignUpPageState createState() => _LetSignUpPageState();
 }
 
-class _LetSignUpPageState extends BaseViewState<LetSignUpPage> {
+class _LetSignUpPageState extends BaseState<LetSignUpPage> {
   bool _isLoading = false;
   @override
   void initState() {
@@ -60,21 +62,21 @@ class _LetSignUpPageState extends BaseViewState<LetSignUpPage> {
                 hintText: AuthData.whichChooseText,
               ),
               baseSpace2,
-              // CustomItemPicker(
-              //   isMultiple: true,
-              //   hintText: AuthData.closerDepartHintText,
-              //   title: AuthData.titleDepartments,
-              //   dataList: UniversityService.universities,
-              //   onSelectedList: (temp) {},
-              // ),
-              // baseSpace2,
-              // CustomItemPicker(
-              //   isMultiple: true,
-              //   hintText: AuthData.targetUniHintText,
-              //   title: AuthData.titleUniversities,
-              //   dataList: UniversityService.universities,
-              //   onSelectedList: (temp) {},
-              // ),
+              CustomItemPicker(
+                isMultiple: true,
+                hintText: AuthData.closerDepartHintText,
+                title: AuthData.titleDepartments,
+                dataList: UniversityService.universities,
+                onSelectedList: (temp) {},
+              ),
+              baseSpace2,
+              CustomItemPicker(
+                isMultiple: true,
+                hintText: AuthData.targetUniHintText,
+                title: AuthData.titleUniversities,
+                dataList: UniversityService.universities,
+                onSelectedList: (temp) {},
+              ),
               baseSpace2,
               const Spacer(),
               _isLoading
@@ -82,15 +84,15 @@ class _LetSignUpPageState extends BaseViewState<LetSignUpPage> {
                   : CustomButton(
                       text: AuthData.doneProfile, click: _registerMethod),
               SizedBox(height: dynamicHeight(0.15)),
-
-              /* CustomItemPicker(
+              CustomItemPicker(
+                hintText: 'hint',
                 dataList: UniversityService.universities,
                 title: AuthData.whichSchoolHintText,
                 isMultiple: true,
                 onSelectedList: (selected) {
                   temp = selected;
                 },
-              ), */
+              ),
             ],
           ),
         ),

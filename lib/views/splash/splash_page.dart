@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../base/base_view.dart';
+import '../../base/base_state.dart';
 import '../../constants/pref_keys.dart';
 import '../../route/route_manager.dart';
 import '../../route/routes.dart';
@@ -14,7 +14,7 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends BaseViewState<SplashPage> {
+class _SplashPageState extends BaseState<SplashPage> {
   late bool isLogged;
 
   @override
@@ -34,7 +34,7 @@ class _SplashPageState extends BaseViewState<SplashPage> {
     await Future.delayed(const Duration(milliseconds: 1000));
     final SharedPreferences pref = await SharedPreferences.getInstance();
 
-    isLogged = pref.getBool(PrefKeys.ISLOGGED.toString()) ?? false;
+    isLogged = pref.getBool(PreferencesKeys.ISLOGGED.toString()) ?? false;
 
     RouteManager.navigatePageNamedRemove(
       context: context,

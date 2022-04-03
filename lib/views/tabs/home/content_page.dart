@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trainee_path/base/base_view.dart';
+import 'package:trainee_path/base/base_state.dart';
 import 'package:trainee_path/constants/constants.dart';
 import 'package:trainee_path/models/contents/content_model.dart';
 import 'package:trainee_path/widgets/customs/custom_button.dart';
@@ -15,7 +15,7 @@ class ContentPage extends StatefulWidget {
   State<ContentPage> createState() => _ContentPageState();
 }
 
-class _ContentPageState extends BaseViewState<ContentPage> {
+class _ContentPageState extends BaseState<ContentPage> {
   ScrollController scrollController = ScrollController(
     keepScrollOffset: true,
     debugLabel: 'debug',

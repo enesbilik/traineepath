@@ -1,11 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:trainee_path/views/auth/login_page.dart';
-import 'package:trainee_path/views/auth/sign_up_page.dart';
-import 'package:trainee_path/views/splash/splash_page.dart';
-import 'package:trainee_path/views/tabs/main_page.dart';
+import 'package:trainee_path/deneme.dart';
+
 import 'route/routes.dart';
 import 'theme/app_theme.dart';
+import 'views/auth/login_page.dart';
+import 'views/auth/sign_up_page.dart';
+import 'views/splash/splash_page.dart';
+import 'views/tabs/main_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

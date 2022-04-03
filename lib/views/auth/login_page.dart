@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../base/base_view.dart';
+import '../../base/base_state.dart';
 import '../../constants/auth_data.dart';
 import '../../constants/constants.dart';
 import '../../constants/pref_keys.dart';
@@ -21,7 +21,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends BaseViewState<LoginPage> {
+class _LoginPageState extends BaseState<LoginPage> {
   final _firebaseAuth = AuthService();
   late TextEditingController _mailEditingController;
   late TextEditingController _passwordEditingController;
@@ -155,7 +155,6 @@ class _LoginPageState extends BaseViewState<LoginPage> {
         RouteManager.navigatePageNamedRemove(
           context: context,
           routeName: AppRoute.MAIN,
-          args: userCredential.user!.displayName,
         );
       }
     } on FirebaseAuthException catch (e) {
@@ -172,6 +171,6 @@ class _LoginPageState extends BaseViewState<LoginPage> {
 
   void setLoginState() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
-    await pref.setBool(PrefKeys.ISLOGGED.toString(), true);
+    await pref.setBool(PreferencesKeys.ISLOGGED.toString(), true);
   }
 }

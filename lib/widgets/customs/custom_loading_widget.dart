@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:trainee_path/constants/constants.dart';
+
+import '../../constants/constants.dart';
 
 class CustomLoading extends StatelessWidget {
   final Color color;

@@ -1,5 +1,6 @@
 [
     {
+        "parentId": 1,
         "id": 12,
         "image": "İmage 12",
         "title": "Anatomi1",

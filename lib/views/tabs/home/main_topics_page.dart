@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:trainee_path/base/base_view.dart';
-import 'package:trainee_path/constants/constants.dart';
-import 'package:trainee_path/models/contents/deparment_model.dart';
-import 'package:trainee_path/models/contents/main_topic_model.dart';
-import 'package:trainee_path/models/contents/subtopic_model.dart';
-import 'package:trainee_path/services/http/main_topic_service.dart';
-import 'package:trainee_path/views/tabs/home/content_page.dart';
-import 'package:trainee_path/widgets/customs/custom_loading_widget.dart';
-import 'package:trainee_path/widgets/cards/topic_card.dart';
+
+import '../../../base/base_state.dart';
+import '../../../constants/constants.dart';
+import '../../../models/contents/deparment_model.dart';
+import '../../../models/contents/main_topic_model.dart';
+import '../../../models/contents/subtopic_model.dart';
+import '../../../services/http/main_topic_service.dart';
+import '../../../widgets/cards/topic_card.dart';
+import '../../../widgets/customs/custom_loading_widget.dart';
+import 'content_page.dart';
 
 class MainTopicsPage extends StatefulWidget {
   final DepartmentModel departmentModel;
@@ -18,7 +19,7 @@ class MainTopicsPage extends StatefulWidget {
   State<MainTopicsPage> createState() => _MainTopicsPageState();
 }
 
-class _MainTopicsPageState extends BaseViewState<MainTopicsPage> {
+class _MainTopicsPageState extends BaseState<MainTopicsPage> {
   List<MainTopic> filteredTopics = [];
   int _selectedIndex = 0;
 
@@ -103,7 +104,7 @@ class _MainTopicsPageState extends BaseViewState<MainTopicsPage> {
           itemBuilder: (BuildContext context, int index) {
             SubTopic subTopic = filteredTopics[_selectedIndex].subTopics[index];
 
-            return buildListItem(subTopic);
+            return buildListItem(subTopic, index);
           },
         ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -111,13 +112,14 @@ class _MainTopicsPageState extends BaseViewState<MainTopicsPage> {
     );
   }
 
-  ListTile buildListItem(SubTopic subTopic) {
+  ListTile buildListItem(SubTopic subTopic, int index) {
     return ListTile(
       onTap: () => _navigateContent(subTopic),
       title: Text(subTopic.title),
       subtitle: Text(subTopic.subtitle),
       leading: CircleAvatar(
-        child: Text(subTopic.title[0]),
+        backgroundColor: kPrimary,
+        child: Text((++index).toString()),
       ),
     );
   }

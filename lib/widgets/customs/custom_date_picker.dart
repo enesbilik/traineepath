@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:trainee_path/constants/auth_data.dart';
-import 'package:trainee_path/constants/constants.dart';
-import 'package:trainee_path/utilities/utils.dart';
+
+import '../../constants/auth_data.dart';
+import '../../constants/constants.dart';
+import '../../utilities/utils.dart';
 
 class DatePickerPage extends StatefulWidget {
   const DatePickerPage({Key? key}) : super(key: key);
