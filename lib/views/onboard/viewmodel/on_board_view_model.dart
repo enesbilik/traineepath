@@ -50,8 +50,7 @@ abstract class _OnBoardViewModelBase with Store, BaseViewModel {
 
   Future<void> completeToOnBoard() async {
     await localeManager.setBoolValue(PreferencesKeys.IS_FIRST_APP, false);
-    var deneme = localeManager.getBoolValue(PreferencesKeys.IS_FIRST_APP);
-    print(deneme);
+
     if (navigation.navigatorKey.currentState!.canPop()) {
       navigation.navigatorKey.currentState!.pop();
     } else {

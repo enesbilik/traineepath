@@ -10,7 +10,7 @@ class UserModel {
   final String phoneNumber;
   final DateTime dateOfBirth;
   final String? studyingSchool;
-  final int? grade;
+  final String? grade;
   final String? wantedDepartment;
   final List? closingDeparments;
   final List? wantedUniversities;
@@ -36,7 +36,7 @@ class UserModel {
     String? phoneNumber,
     DateTime? dateOfBirth,
     String? studyingSchool,
-    int? grade,
+    String? grade,
     String? wantedDepartment,
     List? closingDeparments,
     List? wantedUniversities,
@@ -81,7 +81,7 @@ class UserModel {
       phoneNumber: map['phoneNumber'] ?? '',
       dateOfBirth: DateTime.fromMillisecondsSinceEpoch(map['dateOfBirth']),
       studyingSchool: map['studyingSchool'] ?? '',
-      grade: map['grade']?.toInt() ?? 0,
+      grade: map['grade'] ?? '',
       wantedDepartment: map['wantedDepartment'] ?? '',
       closingDeparments: List.from(map['closingDeparments']),
       wantedUniversities: List.from(map['wantedUniversities']),

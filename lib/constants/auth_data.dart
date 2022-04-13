@@ -17,9 +17,8 @@ class AuthData {
   static const knowYouText = "Önce seni tanıyalım";
   static const whichSchoolHintText = "Hangi Okulda Okuyorsun?";
   static const whichGradeHintText = "Kaçıncı Sınıfa Gidiyorsun";
-  static const whichChooseHintText = "Hangi alanda tercih yapacaksın";
+  // static const whichChooseHintText = "Hangi alanda tercih yapacaksın";
   static const closerDepartHintText = "Sana daha yakın gelen bölümler";
-  static const whichChooseText = "Hangi alanda tercih yapacaksın";
   static const targetUniHintText = "Hedeflediğin üniversiteler";
   static const titleDepartments = "Bölümler";
   static const titleUniversities = "Üniversiteler";

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'I_route_service.dart';
+import 'inter_nav_service.dart';
 
 class NavigationService implements INavigationService {
   static final NavigationService _instance = NavigationService._init();
@@ -9,6 +9,7 @@ class NavigationService implements INavigationService {
   NavigationService._init();
 
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+  // ignore: prefer_function_declarations_over_variables
   final removeAllOldRoutes = (Route<dynamic> route) => false;
 
   @override

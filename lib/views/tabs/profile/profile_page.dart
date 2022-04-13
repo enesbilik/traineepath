@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:trainee_path/route/route_manager.dart';
-import 'package:trainee_path/services/firebase/auth_service.dart';
 
 import '../../../base/base_state.dart';
 import '../../../constants/constants.dart';
 import '../../../constants/pref_keys.dart';
+import '../../../route/route_manager.dart';
 import '../../../route/routes.dart';
-
-//TODO: Sevdi ile toplantı ayarla
+import '../../../services/firebase/auth_service.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -127,7 +125,6 @@ class _ProfilePageState extends BaseState<ProfilePage> {
       actions: [
         IconButton(
           onPressed: () {
-            print("user out");
             setLoginState();
           },
           icon: const Icon(

@@ -1,12 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:trainee_path/route/navigation_service.dart';
-import 'package:trainee_path/views/onboard/view/on_board_view.dart';
 
+import 'route/navigation_service.dart';
 import 'route/routes.dart';
 import 'theme/app_theme.dart';
 import 'views/auth/login_page.dart';
 import 'views/auth/sign_up_page.dart';
+import 'views/onboard/view/on_board_view.dart';
 import 'views/splash/splash_page.dart';
 import 'views/tabs/main_page.dart';
 
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //home: const OnBoardView(),
+      //home: LetSignUpPage(myUser: _userModel, password: 'password'),
       debugShowCheckedModeBanner: false,
       title: 'TraineePath',
       theme: AppTheme.lightTheme,

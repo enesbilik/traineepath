@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:trainee_path/data/universities.dart';
+import 'package:trainee_path/widgets/customs/custom_drop_multi.dart';
+import 'package:trainee_path/widgets/customs/custom_drop_single.dart';
 
 import '../../base/base_state.dart';
 import '../../constants/auth_data.dart';
@@ -9,17 +12,17 @@ import '../../models/users/user_model.dart';
 import '../../route/route_manager.dart';
 import '../../route/routes.dart';
 import '../../services/firebase/auth_service.dart';
-import '../../temp_data/universities.dart';
+
 import '../../utilities/utils.dart';
 import '../../widgets/customs/custom_button.dart';
-import '../../widgets/customs/custom_item_picker.dart';
 import '../../widgets/customs/custom_loading_widget.dart';
 import '../../widgets/customs/custom_text_field.dart';
 
+// ignore: must_be_immutable
 class LetSignUpPage extends StatefulWidget {
-  final UserModel myUser;
+  UserModel myUser;
   final String password;
-  const LetSignUpPage({Key? key, required this.myUser, required this.password})
+  LetSignUpPage({Key? key, required this.myUser, required this.password})
       : super(key: key);
 
   @override
@@ -28,13 +31,16 @@ class LetSignUpPage extends StatefulWidget {
 
 class _LetSignUpPageState extends BaseState<LetSignUpPage> {
   bool _isLoading = false;
+  late TextEditingController whichSchoolController;
+  String? whichGradeController;
+  List closingDepartments = [];
+  List targetUniversities = [];
+
   @override
   void initState() {
+    whichSchoolController = TextEditingController();
     super.initState();
-    // UniversityService.readJson();
   }
-
-  List temp = [];
 
   @override
   Widget build(BuildContext context) {
@@ -50,49 +56,40 @@ class _LetSignUpPageState extends BaseState<LetSignUpPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: dynamicHeight(0.07)),
-              const CustomTextField(
+              CustomTextField(
                 hintText: AuthData.whichSchoolHintText,
+                controller: whichSchoolController,
               ),
               baseSpace2,
-              const CustomTextField(
+              CustomDropSingle(
                 hintText: AuthData.whichGradeHintText,
+                items: DropItemService.grades,
+                onSelected: (val) {
+                  whichGradeController = val;
+                },
               ),
               baseSpace2,
-              const CustomTextField(
-                hintText: AuthData.whichChooseText,
-              ),
-              baseSpace2,
-              CustomItemPicker(
-                isMultiple: true,
+              CustomDropMulti(
                 hintText: AuthData.closerDepartHintText,
-                title: AuthData.titleDepartments,
-                dataList: UniversityService.universities,
-                onSelectedList: (temp) {},
+                items: DropItemService.departments,
+                onSelected: (val) {
+                  closingDepartments = val;
+                },
               ),
               baseSpace2,
-              CustomItemPicker(
-                isMultiple: true,
+              CustomDropMulti(
                 hintText: AuthData.targetUniHintText,
-                title: AuthData.titleUniversities,
-                dataList: UniversityService.universities,
-                onSelectedList: (temp) {},
+                items: DropItemService.universities,
+                onSelected: (val) {
+                  targetUniversities = val;
+                },
               ),
-              baseSpace2,
               const Spacer(),
               _isLoading
                   ? const CustomLoading()
                   : CustomButton(
                       text: AuthData.doneProfile, click: _registerMethod),
               SizedBox(height: dynamicHeight(0.15)),
-              CustomItemPicker(
-                hintText: 'hint',
-                dataList: UniversityService.universities,
-                title: AuthData.whichSchoolHintText,
-                isMultiple: true,
-                onSelectedList: (selected) {
-                  temp = selected;
-                },
-              ),
             ],
           ),
         ),
@@ -122,6 +119,24 @@ class _LetSignUpPageState extends BaseState<LetSignUpPage> {
 
   void _registerMethod() async {
     _changeLoading();
+    _assignUser();
+
+    _changeLoading();
+  }
+
+  void _changeLoading() {
+    setState(() {
+      _isLoading = !_isLoading;
+    });
+  }
+
+  void _assignUser() async {
+    var resultOfValidate = _validateUserInfos();
+    if (resultOfValidate != null) {
+      Utils.showSnackBar(context, resultOfValidate);
+      return;
+    }
+    _addLastUserInfo();
     try {
       var userCredential =
           await AuthService.register(widget.myUser, widget.password);
@@ -138,12 +153,29 @@ class _LetSignUpPageState extends BaseState<LetSignUpPage> {
     } on FirebaseAuthException catch (e) {
       Utils.showSnackBar(context, e.message.toString());
     }
-    _changeLoading();
   }
 
-  void _changeLoading() {
-    setState(() {
-      _isLoading = !_isLoading;
-    });
+  String? _validateUserInfos() {
+    if (whichSchoolController.text.length <= 2) {
+      return "Lütfen okul giriniz";
+    } else if (whichGradeController == null) {
+      return "Lütfen Sınıf Seçiniz!";
+    } else if (closingDepartments.isEmpty) {
+      return "Lütfen Bölüm seçiniz";
+    } else if (targetUniversities.isEmpty) {
+      return "Hedeflediğiniz üniversiteleri giriniz";
+    }
+    return null;
+  }
+
+  void _addLastUserInfo() {
+    UserModel lastUser = widget.myUser.copyWith(
+      studyingSchool: whichSchoolController.text,
+      grade: whichGradeController,
+      closingDeparments: closingDepartments,
+      wantedUniversities: targetUniversities,
+    );
+    widget.myUser = lastUser;
+    //print(widget.myUser);
   }
 }

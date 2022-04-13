@@ -37,7 +37,6 @@ class _SplashPageState extends BaseState<SplashPage> {
 
     isLogged = pref.getBool(PreferencesKeys.ISLOGGED.toString()) ?? false;
     isFirst = pref.getBool(PreferencesKeys.IS_FIRST_APP.toString()) ?? true;
-    print(isFirst);
 
     if (isFirst) {
       RouteManager.navigatePageNamedRemove(
