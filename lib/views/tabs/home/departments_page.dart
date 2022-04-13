@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:trainee_path/models/users/user_model.dart';
 
 import '../../../base/base_state.dart';
 import '../../../constants/constants.dart';
@@ -20,10 +23,17 @@ class _HomePageState extends BaseState<HomePage> {
   late TextEditingController searchController;
   List<DepartmentModel> futureDepartments = [];
   List<DepartmentModel> filteredDepartments = [];
+  String name = '';
+  late UserModel newUser;
+  var userDoc = FirebaseFirestore.instance
+      .collection('USERS')
+      .doc(FirebaseAuth.instance.currentUser!.uid);
 
   @override
   void initState() {
     searchController = TextEditingController();
+    initUserData();
+
     initData();
 
     super.initState();
@@ -48,7 +58,7 @@ class _HomePageState extends BaseState<HomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             baseSpace3,
-            title('Enes'),
+            title(name),
             //baseSpace1,
             subTitle,
             //baseSpace3,
@@ -83,7 +93,7 @@ class _HomePageState extends BaseState<HomePage> {
       return buildListView();
     } else if (isSerching && filteredDepartments.isEmpty) {
       return const Center(
-        child: Text("Not Found"),
+        child: Text("Bulunamadı.."),
       );
     } else {
       return const CustomLoading();
@@ -144,5 +154,14 @@ class _HomePageState extends BaseState<HomePage> {
         futureDepartments = filteredDepartments = data;
       });
     });
+  }
+
+  Future<void> initUserData() async {
+    var queryDoc = await userDoc.get();
+    Map<String, dynamic>? data = queryDoc.data();
+    if (data != null) {
+      newUser = UserModel.fromMap(data);
+      name = newUser.name;
+    }
   }
 }

@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trainee_path/widgets/customs/custom_loading_widget.dart';
 
 import '../../../base/base_state.dart';
 import '../../../constants/constants.dart';
 import '../../../constants/pref_keys.dart';
+import '../../../models/users/user_model.dart';
 import '../../../route/route_manager.dart';
 import '../../../route/routes.dart';
 import '../../../services/firebase/auth_service.dart';
@@ -18,15 +22,28 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends BaseState<ProfilePage> {
   int _selectedButton = 0;
+  late UserModel newUser;
+  bool _isLoading = false;
+
+  var userDoc = FirebaseFirestore.instance
+      .collection('USERS')
+      .doc(FirebaseAuth.instance.currentUser!.uid);
+
+  @override
+  void initState() {
+    initUserData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: _floatingButton(),
-      extendBody: true,
-      extendBodyBehindAppBar: true,
+      // extendBody: true,
+      // extendBodyBehindAppBar: true,
       appBar: _appBar(),
       backgroundColor: kBackgroundColor,
-      body: _buildBody(),
+      body: _isLoading == true ? const CustomLoading() : _buildBody(),
     );
   }
 
@@ -52,9 +69,8 @@ class _ProfilePageState extends BaseState<ProfilePage> {
       padding: basePadding,
       child: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _circleAvatar,
+            //_circleAvatar,
             baseSpace1,
             _name,
             baseSpace1,
@@ -62,17 +78,38 @@ class _ProfilePageState extends BaseState<ProfilePage> {
             baseSpace2,
             _buildIconText(
               'assets/icons/school-solid.svg',
-              'Beşiktaş Anadolu Lisesi',
+              '${newUser.studyingSchool}',
             ),
             baseSpace1,
             _buildIconText(
               'assets/icons/graduation-cap-solid.svg',
-              '12. Sınıf',
+              userGrade,
             ),
             baseSpace2,
             _getTargetButtons(),
+            baseSpace1,
+            buildTargetList(_selectedButton),
           ],
         ),
+      ),
+    );
+  }
+
+  Expanded buildTargetList(int selectedIndex) {
+    var newList = selectedIndex == 0
+        ? newUser.wantedUniversities
+        : newUser.closingDeparments;
+    return Expanded(
+      child: ListView.builder(
+        itemCount: newList!.length,
+        itemBuilder: (BuildContext context, int index) {
+          var school = newList[index];
+          return Card(
+            child: ListTile(
+              title: Text(school),
+            ),
+          );
+        },
       ),
     );
   }
@@ -125,12 +162,14 @@ class _ProfilePageState extends BaseState<ProfilePage> {
       actions: [
         IconButton(
           onPressed: () {
-            setLoginState();
+            exitSureDialog();
+
+            // setLoginState();
           },
           icon: const Icon(
-            Icons.settings,
+            Icons.exit_to_app,
           ),
-          tooltip: 'Edit Profile',
+          tooltip: 'Exit',
         )
       ],
     );
@@ -145,21 +184,21 @@ class _ProfilePageState extends BaseState<ProfilePage> {
 
   Text get _name {
     return Text(
-      "Antonio Perez",
-      style: TextStyle(fontSize: dynamicFontSize(50), color: kTextColor),
+      "${newUser.name} ${newUser.surName}",
+      style: TextStyle(fontSize: dynamicFontSize(34), color: kTextColor),
     );
   }
 
-  CircleAvatar get _circleAvatar {
-    return CircleAvatar(
-      radius: dynamicWidth(0.20),
-      backgroundColor: Colors.white,
-      child: CircleAvatar(
-        backgroundColor: kPrimary.withOpacity(0.9),
-        radius: dynamicWidth(0.17),
-      ),
-    );
-  }
+  // CircleAvatar get _circleAvatar {
+  //   return CircleAvatar(
+  //     radius: dynamicWidth(0.20),
+  //     backgroundColor: Colors.white,
+  //     child: CircleAvatar(
+  //       backgroundColor: kPrimary.withOpacity(0.9),
+  //       radius: dynamicWidth(0.17),
+  //     ),
+  //   );
+  // }
 
   Row _buildIconText(String iconPath, String text) {
     return Row(
@@ -175,6 +214,51 @@ class _ProfilePageState extends BaseState<ProfilePage> {
               fontWeight: FontWeight.bold, fontSize: dynamicFontSize(18)),
         ),
       ],
+    );
+  }
+
+  Future<void> initUserData() async {
+    _changeLoading();
+    var queryDoc = await userDoc.get();
+    Map<String, dynamic>? data = queryDoc.data();
+
+    if (data != null) {
+      setState(() {
+        newUser = UserModel.fromMap(data);
+      });
+      _changeLoading();
+    }
+  }
+
+  void _changeLoading() {
+    setState(() {
+      _isLoading = !_isLoading;
+    });
+  }
+
+  String get userGrade {
+    String grade = newUser.grade!;
+    int? isNum = int.tryParse(grade);
+
+    return isNum == null ? "${newUser.grade}" : "${newUser.grade} .Sınıf";
+  }
+
+  void exitSureDialog() {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('Çıkış yapmak istediğine emin misin?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('İptal'),
+          ),
+          TextButton(
+            onPressed: () => setLoginState(),
+            child: const Text('Devam'),
+          ),
+        ],
+      ),
     );
   }
 }
