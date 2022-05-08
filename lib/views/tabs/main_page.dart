@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../constants/constants.dart';
+import 'bookmark/bookmark_page.dart';
 import 'home/departments_page.dart';
 import 'profile/profile_page.dart';
 
@@ -14,7 +15,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   List<Widget> tabs = [
     const HomePage(),
-    //const BookMark(),
+    const BookMark(),
     const ProfilePage(),
     //const SubTopicPage(),
   ];
@@ -50,11 +51,11 @@ class _MainPageState extends State<MainPage> {
           label: "Ana sayfa",
           activeIcon: Icon(Icons.home),
         ),
-        // BottomNavigationBarItem(
-        //   icon: Icon(Icons.bookmark_outline),
-        //   label: "Kaydedilenler",
-        //   activeIcon: Icon(Icons.bookmark),
-        // ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.bookmark_outline),
+          label: "Kaydedilenler",
+          activeIcon: Icon(Icons.bookmark),
+        ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person_outline),
           label: "Profil",

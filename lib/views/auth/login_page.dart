@@ -109,7 +109,9 @@ class _LoginPageState extends BaseState<LoginPage> {
     return Align(
       alignment: Alignment.topRight,
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          RouteManager.navigatePageNamed(context, AppRoute.FORGOT);
+        },
         child: Text(
           AuthData.forgotPasswordText,
           style: kForgotPasswordStyle.copyWith(

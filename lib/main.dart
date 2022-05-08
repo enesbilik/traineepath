@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:trainee_path/views/auth/forgot_password_page.dart';
 
 import 'route/navigation_service.dart';
 import 'route/routes.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //home: LetSignUpPage(myUser: _userModel, password: 'password'),
+      //home: ForgotPasswordPage(),
       debugShowCheckedModeBanner: false,
       title: 'TraineePath',
       theme: AppTheme.lightTheme,
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         AppRoute.SIGN: (context) => const SignUpPage(),
         AppRoute.SPLASH: (context) => const SplashPage(),
         AppRoute.ON_BOARD: (context) => const OnBoardView(),
+        AppRoute.FORGOT: (context) => const ForgotPasswordPage(),
       },
     );
   }

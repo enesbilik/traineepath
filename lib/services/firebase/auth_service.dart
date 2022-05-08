@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:trainee_path/models/users/user_model.dart';
+
+import '../../models/users/user_model.dart';
 
 class AuthService {
   static final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -35,7 +36,7 @@ class AuthService {
     return await _firebaseAuth.signOut();
   }
 
-  static Future<void> passwordReset(String _email) async {
+  Future<void> passwordReset(String _email) async {
     await _firebaseAuth.sendPasswordResetEmail(email: _email);
   }
 }

@@ -1,0 +1,200 @@
+{
+  "departments": [
+    {
+      "id": 1,
+      "image": "1İmage url",
+      "title": "1Tıp Fakültesi",
+      "topics": [
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "id": 2,
+      "image": "İmage2 url",
+      "title": "Tıp Fak2ültesi",
+      "topics": [
+        22,
+        23,
+        24
+      ]
+    },
+    {
+      "id": 3,
+      "image": "İmag3e url",
+      "title": "Tıp3 Fakültesi",
+      "topics": [
+        32
+      ]
+    }
+  ],
+  "main_topics": [
+    {
+      "id": 12,
+      "image": "İmage 12",
+      "title": "Anatomi1",
+      "sub_topics": [
+        {
+          "content": {
+            "image": "image url",
+            "mainTitle": "main title",
+            "subtitle": "Detay Alt Başlık",
+            "subtitleContent": "Dety Alt İçerik",
+            "title": "Protez Diş Türleri Nelerdir?",
+            "titleContent": "Dişler, sindirim sisteminin önemli bir parçasıdır ve insan sağlığı için son derece önemlidir. Diş protezleri diş tedavisinde son seçenek olmalı ve genellikle diş kaybına neden olan durumlarda (diş çürüğü, kırık dişler veya yetersiz dolgu gibi) kullanılmalıdır. Yani dişlerdeki rahatsızlığın boyutu uygulanan tedavi ile düzeltilemiyorsa kişi protez tedavisinden faydalanabilir. Protez uygulamasında kişilerin var olan sağlıklı dişlerinin korunması çok önemlidir. Genellikle sabit ve hareketli olmak üzere iki farklı protez türü vardır.",
+            "video": "qXEA3zkC6fk"
+          },
+          "subtitle": "sub title",
+          "title": "Protez Diş Türleri Nelerdir?"
+        },
+        {
+          "content": {
+            "image": "image url",
+            "mainTitle": "main title",
+            "subtitle": "Detay Alt Başlık",
+            "subtitleContent": "Dety Alt İçerik",
+            "title": "Protez Diş Nedir?",
+            "titleContent": "Kaybedilen dişlerin yerini alan protezler kişiye özel üretilir. Hastanın kişisel ihtiyacına göre üretilen protezler hastanın ağzına tam oturmalı, doğal görünmeli ve kullanımı kolay fonksiyonlara sahip olmalıdır. Diş restorasyonları, bir veya daha fazla eksik dişi veya tüm dişleri değiştirmek için kullanılabilir. Ancak protez uygulamalarında en önemlisi hastanın ağzında kalan mevcut dişlerin korunmasıdır. Protezler insan kemiklerinin rengine en uygun tonlarda üretilir. Bu nedenle insan protezlerinin rengi doğal bir görünüme sahiptir. Protez uygulamasının temel amacı, kaybedilen çiğneme fonksiyonunun eski haline getirilmesidir. Çiğneme veriminin geri kazanılmasıyla birlikte yaşam kalitesi de artmıştır. Tüm bunların yanında kırılan dişlerin psikolojik etkileri, renk değişikliği veya deformasyonu da ortadan kaldırılır.",
+            "video": "video1 url"
+          },
+          "subtitle": "",
+          "title": "Protez Diş Nedir?"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "image": "İmage2 url",
+      "sub_topics": [
+        {
+          "content": {
+            "image": "image url",
+            "mainTitle": "main title",
+            "subtitle": "Detay Alt 2Başlık",
+            "subtitleContent": "Dety2 Alt İçerik",
+            "title": "Detay Başl2ık",
+            "titleContent": "Dety 2İçerik",
+            "video": "video2 url"
+          },
+          "subtitle": "Tıp sanat mıdır2?",
+          "title": "Tıp ve Sanat2"
+        },
+        {
+          "content": {
+            "image": "image url",
+            "mainTitle": "main title",
+            "subtitle": "Detay Alt 2Başlık",
+            "subtitleContent": "Dety2 Alt İçerik",
+            "title": "Detay Başl2ık",
+            "titleContent": "Dety 2İçerik",
+            "video": "dds url"
+          },
+          "subtitle": "Tıp sanat mıdır2?",
+          "title": "Data Değişti"
+        }
+      ],
+      "title": "2Anatomi"
+    },
+    {
+      "id": 14,
+      "image": "İmage2 url",
+      "sub_topics": [
+        {
+          "content": {
+            "image": "image url",
+            "mainTitle": "main title",
+            "subtitle": "Detay Alt 2Başlık",
+            "subtitleContent": "Dety2 Alt İçerik",
+            "title": "Detay Başl2ık",
+            "titleContent": "Dety 2İçerik",
+            "video": "video2 url"
+          },
+          "subtitle": "Tıp sanat mıdır2?",
+          "title": "Tıp ve Sanat2"
+        }
+      ],
+      "title": "2Anatomi"
+    },
+    {
+      "id": 22,
+      "image": "İmage3 url",
+      "sub_topics": [
+        {
+          "content": {
+            "image": "image url",
+            "mainTitle": "main title",
+            "subtitle": "Detay Alt3 Başlık",
+            "subtitleContent": "De3ty Alt İçerik",
+            "title": "Detay B3aş3lık",
+            "titleContent": "Dety3 İçerik",
+            "video": "video31 url"
+          },
+          "subtitle": "Tıp sana3t mıdır?",
+          "title": "Tıp v3e Sanat"
+        }
+      ],
+      "title": "Anat3omi"
+    },
+    {
+      "id": 23,
+      "image": "İmage2 url",
+      "sub_topics": [
+        {
+          "content": {
+            "image": "image url",
+            "mainTitle": "main title",
+            "subtitle": "Detay Alt 2Başlık",
+            "subtitleContent": "Dety2 Alt İçerik",
+            "title": "Detay Başl2ık",
+            "titleContent": "Dety 2İçerik",
+            "video": "video2 url"
+          },
+          "subtitle": "Tıp sanat mıdır2?",
+          "title": "Tıp ve Sanat2"
+        }
+      ],
+      "title": "2Anatomi"
+    },
+    {
+      "id": 24,
+      "image": "İmage2 url",
+      "sub_topics": [
+        {
+          "content": {
+            "image": "image url",
+            "mainTitle": "main title",
+            "subtitle": "Detay Alt 2Başlık",
+            "subtitleContent": "Dety2 Alt İçerik",
+            "title": "Detay Başl2ık",
+            "titleContent": "Dety 2İçerik",
+            "video": "video2 url"
+          },
+          "subtitle": "Tıp sanat mıdır2?",
+          "title": "Tıp ve Sanat2"
+        }
+      ],
+      "title": "2Anatomi"
+    },
+    {
+      "id": 32,
+      "image": "İmage2 url",
+      "sub_topics": [
+        {
+          "content": {
+            "image": "image url",
+            "mainTitle": "main title",
+            "subtitle": "Detay Alt 2Başlık",
+            "subtitleContent": "Dety2 Alt İçerik",
+            "title": "Detay Başl2ık",
+            "titleContent": "Dety 2İçerik",
+            "video": "video2 url"
+          },
+          "subtitle": "Tıp sanat mıdır2?",
+          "title": "Tıp ve Sanat2"
+        }
+      ],
+      "title": "2Anatomi"
+    }
+  ]
+}

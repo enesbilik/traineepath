@@ -1,4 +1,4 @@
-package com.example.trainee_path
+package com.traineepath.trainee_path
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -11,7 +11,7 @@ class UserModel {
   final DateTime dateOfBirth;
   final String? studyingSchool;
   final String? grade;
-  final String? wantedDepartment;
+  final List? savedTopics;
   final List? closingDeparments;
   final List? wantedUniversities;
   UserModel({
@@ -23,7 +23,7 @@ class UserModel {
     required this.dateOfBirth,
     this.studyingSchool,
     this.grade,
-    this.wantedDepartment,
+    this.savedTopics,
     this.closingDeparments,
     this.wantedUniversities,
   });
@@ -37,7 +37,7 @@ class UserModel {
     DateTime? dateOfBirth,
     String? studyingSchool,
     String? grade,
-    String? wantedDepartment,
+    List? savedTopics,
     List? closingDeparments,
     List? wantedUniversities,
   }) {
@@ -50,7 +50,7 @@ class UserModel {
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       studyingSchool: studyingSchool ?? this.studyingSchool,
       grade: grade ?? this.grade,
-      wantedDepartment: wantedDepartment ?? this.wantedDepartment,
+      savedTopics: savedTopics ?? this.savedTopics,
       closingDeparments: closingDeparments ?? this.closingDeparments,
       wantedUniversities: wantedUniversities ?? this.wantedUniversities,
     );
@@ -66,7 +66,7 @@ class UserModel {
       'dateOfBirth': dateOfBirth.millisecondsSinceEpoch,
       'studyingSchool': studyingSchool,
       'grade': grade,
-      'wantedDepartment': wantedDepartment,
+      'savedTopics': savedTopics,
       'closingDeparments': closingDeparments,
       'wantedUniversities': wantedUniversities,
     };
@@ -82,7 +82,7 @@ class UserModel {
       dateOfBirth: DateTime.fromMillisecondsSinceEpoch(map['dateOfBirth']),
       studyingSchool: map['studyingSchool'] ?? '',
       grade: map['grade'] ?? '',
-      wantedDepartment: map['wantedDepartment'] ?? '',
+      savedTopics: List.from(map['savedTopics']),
       closingDeparments: List.from(map['closingDeparments']),
       wantedUniversities: List.from(map['wantedUniversities']),
     );
@@ -95,39 +95,6 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(userId: $userId, name: $name, surName: $surName, mail: $mail, phoneNumber: $phoneNumber, dateOfBirth: $dateOfBirth, studyingSchool: $studyingSchool, grade: $grade, wantedDepartment: $wantedDepartment, closingDeparments: $closingDeparments, wantedUniversities: $wantedUniversities)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is UserModel &&
-        other.userId == userId &&
-        other.name == name &&
-        other.surName == surName &&
-        other.mail == mail &&
-        other.phoneNumber == phoneNumber &&
-        other.dateOfBirth == dateOfBirth &&
-        other.studyingSchool == studyingSchool &&
-        other.grade == grade &&
-        other.wantedDepartment == wantedDepartment &&
-        listEquals(other.closingDeparments, closingDeparments) &&
-        listEquals(other.wantedUniversities, wantedUniversities);
-  }
-
-  @override
-  int get hashCode {
-    return userId.hashCode ^
-        name.hashCode ^
-        surName.hashCode ^
-        mail.hashCode ^
-        phoneNumber.hashCode ^
-        dateOfBirth.hashCode ^
-        studyingSchool.hashCode ^
-        grade.hashCode ^
-        wantedDepartment.hashCode ^
-        closingDeparments.hashCode ^
-        wantedUniversities.hashCode;
+    return 'UserModel(userId: $userId, name: $name, surName: $surName, mail: $mail, phoneNumber: $phoneNumber, dateOfBirth: $dateOfBirth, studyingSchool: $studyingSchool, grade: $grade, savedTopics: $savedTopics, closingDeparments: $closingDeparments, wantedUniversities: $wantedUniversities)';
   }
 }

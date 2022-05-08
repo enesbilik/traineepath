@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:trainee_path/constants/api_key.dart';
-import 'package:trainee_path/constants/auth_data.dart';
-import 'package:trainee_path/constants/http_constants.dart';
+
+import '../constants/api_key.dart';
+import '../constants/auth_data.dart';
+import '../constants/http_constants.dart';
 
 class Utils {
   static List<Widget> modelBuilder<M>(

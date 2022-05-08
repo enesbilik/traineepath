@@ -17,6 +17,7 @@ class OnBoardView extends StatefulWidget {
 }
 
 class _OnBoardViewState extends BaseState<OnBoardView> {
+  //TODO: mobx
   @override
   Widget build(BuildContext context) {
     return BaseView<OnBoardViewModel>(

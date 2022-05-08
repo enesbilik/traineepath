@@ -68,7 +68,7 @@ class DeparmentCard extends StatelessWidget {
   Flexible subTitle(BuildContext context) {
     return Flexible(
       child: Text(
-        "${department.topics.length} Adımdan 5’ini tamamladın.",
+        "${department.topics.length} Adımda ",
         style: kTextStyleNormal.copyWith(
             fontSize: Utils.dynamicFontSize(context, 16)),
       ),

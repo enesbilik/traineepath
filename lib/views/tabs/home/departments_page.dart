@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:trainee_path/models/users/user_model.dart';
 
 import '../../../base/base_state.dart';
 import '../../../constants/constants.dart';
 import '../../../constants/home_data.dart';
 import '../../../models/contents/deparment_model.dart';
+import '../../../models/users/user_model.dart';
 import '../../../services/http/department_service.dart';
 import '../../../widgets/cards/deparment_card.dart';
 import '../../../widgets/customs/custom_loading_widget.dart';

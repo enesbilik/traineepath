@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:trainee_path/base/base_state.dart';
-import 'package:trainee_path/constants/auth_data.dart';
-import 'package:trainee_path/constants/constants.dart';
-import 'package:trainee_path/models/users/user_model.dart';
-import 'package:trainee_path/utilities/utils.dart';
-import 'package:trainee_path/views/auth/let_sign_up_page.dart';
-import 'package:trainee_path/widgets/customs/custom_button.dart';
-import 'package:trainee_path/widgets/customs/custom_text_field.dart';
+
+import '../../base/base_state.dart';
+import '../../constants/auth_data.dart';
+import '../../constants/constants.dart';
+import '../../models/users/user_model.dart';
+import '../../utilities/utils.dart';
+import '../../widgets/customs/custom_button.dart';
+import '../../widgets/customs/custom_text_field.dart';
+import 'let_sign_up_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);

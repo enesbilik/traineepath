@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "869845044371",
+    "firebase_url": "https://traineepath-101fd-default-rtdb.firebaseio.com",
+    "project_id": "traineepath-101fd",
+    "storage_bucket": "traineepath-101fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869845044371:android:ff5006df66e94cc1e69166",
+        "android_client_info": {
+          "package_name": "com.traineepath.trainee_path"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "869845044371-bbne33dtqbaorum5ut4lp1lvhigopd3n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoygKa331l8gTtqFXMvPumOlsXBKrd7Ps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "869845044371-bbne33dtqbaorum5ut4lp1lvhigopd3n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "869845044371-ej6opshcfob13ahteohgb16tviogn7rd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.traineepath.traineePath"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

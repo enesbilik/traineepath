@@ -38,7 +38,7 @@ class _ProfilePageState extends BaseState<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: _floatingButton(),
+      // floatingActionButton: _floatingButton(),
       // extendBody: true,
       // extendBodyBehindAppBar: true,
       appBar: _appBar(),
@@ -47,14 +47,14 @@ class _ProfilePageState extends BaseState<ProfilePage> {
     );
   }
 
-  FloatingActionButton _floatingButton() {
-    return FloatingActionButton(
-      tooltip: 'Edit Profile',
-      backgroundColor: kPrimary,
-      onPressed: () {},
-      child: const Icon(Icons.edit),
-    );
-  }
+  // FloatingActionButton _floatingButton() {
+  //   return FloatingActionButton(
+  //     tooltip: 'Edit Profile',
+  //     backgroundColor: kPrimary,
+  //     onPressed: () {},
+  //     child: const Icon(Icons.edit),
+  //   );
+  // }
 
   void setLoginState() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();

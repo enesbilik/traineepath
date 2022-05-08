@@ -1,20 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:trainee_path/data/universities.dart';
-import 'package:trainee_path/widgets/customs/custom_drop_multi.dart';
-import 'package:trainee_path/widgets/customs/custom_drop_single.dart';
 
 import '../../base/base_state.dart';
 import '../../constants/auth_data.dart';
 import '../../constants/constants.dart';
+import '../../data/universities.dart';
 import '../../models/users/user_model.dart';
 import '../../route/route_manager.dart';
 import '../../route/routes.dart';
 import '../../services/firebase/auth_service.dart';
-
 import '../../utilities/utils.dart';
 import '../../widgets/customs/custom_button.dart';
+import '../../widgets/customs/custom_drop_multi.dart';
+import '../../widgets/customs/custom_drop_single.dart';
 import '../../widgets/customs/custom_loading_widget.dart';
 import '../../widgets/customs/custom_text_field.dart';
 
@@ -63,7 +62,7 @@ class _LetSignUpPageState extends BaseState<LetSignUpPage> {
               baseSpace2,
               CustomDropSingle(
                 hintText: AuthData.whichGradeHintText,
-                items: DropItemService.grades,
+                items: DropItemService().grades,
                 onSelected: (val) {
                   whichGradeController = val;
                 },
@@ -71,7 +70,7 @@ class _LetSignUpPageState extends BaseState<LetSignUpPage> {
               baseSpace2,
               CustomDropMulti(
                 hintText: AuthData.closerDepartHintText,
-                items: DropItemService.departments,
+                items: DropItemService().departments,
                 onSelected: (val) {
                   closingDepartments = val;
                 },
@@ -79,7 +78,7 @@ class _LetSignUpPageState extends BaseState<LetSignUpPage> {
               baseSpace2,
               CustomDropMulti(
                 hintText: AuthData.targetUniHintText,
-                items: DropItemService.universities,
+                items: DropItemService().universities,
                 onSelected: (val) {
                   targetUniversities = val;
                 },
@@ -174,6 +173,7 @@ class _LetSignUpPageState extends BaseState<LetSignUpPage> {
       grade: whichGradeController,
       closingDeparments: closingDepartments,
       wantedUniversities: targetUniversities,
+      savedTopics: [],
     );
     widget.myUser = lastUser;
     //print(widget.myUser);

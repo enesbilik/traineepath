@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:trainee_path/base/base_state.dart';
-import 'package:trainee_path/constants/constants.dart';
-import 'package:trainee_path/models/contents/content_model.dart';
-import 'package:trainee_path/widgets/customs/custom_button.dart';
-import 'package:trainee_path/widgets/customs/custom_visible_column.dart';
 
+import '../../../base/base_state.dart';
+import '../../../constants/constants.dart';
+import '../../../models/contents/content_model.dart';
 import '../../../widgets/cards/youtube_player.dart';
+import '../../../widgets/customs/custom_button.dart';
+import '../../../widgets/customs/custom_visible_column.dart';
 
 class ContentPage extends StatefulWidget {
   final Content content;
@@ -69,7 +69,11 @@ class _ContentPageState extends BaseState<ContentPage> {
                 visible: widget.content.video.isNotEmpty,
               ),
               quarterHeight,
-              CustomButton(text: 'Tamamla', click: () {}),
+              CustomButton(
+                  text: 'Tamamla',
+                  click: () {
+                    Navigator.pop(context);
+                  }),
               baseSpace3,
             ],
           ), /*  */

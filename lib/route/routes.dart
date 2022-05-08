@@ -6,4 +6,5 @@ class AppRoute {
   static const SIGN = '/sign';
   static const SPLASH = '/splash';
   static const ON_BOARD = '/on_board';
+  static const FORGOT = '/forgot';
 }
