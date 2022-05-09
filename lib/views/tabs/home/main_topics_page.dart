@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../base/base_state.dart';
@@ -6,6 +8,7 @@ import '../../../models/contents/deparment_model.dart';
 import '../../../models/contents/main_topic_model.dart';
 import '../../../models/contents/subtopic_model.dart';
 import '../../../services/http/main_topic_service.dart';
+import '../../../utilities/utils.dart';
 import '../../../widgets/cards/topic_card.dart';
 import '../../../widgets/customs/custom_loading_widget.dart';
 import 'content_page.dart';
@@ -20,8 +23,14 @@ class MainTopicsPage extends StatefulWidget {
 }
 
 class _MainTopicsPageState extends BaseState<MainTopicsPage> {
+  final double _circular = 20;
   List<MainTopic> filteredTopics = [];
   int _selectedIndex = 0;
+  List _savedTopicList = [];
+
+  final userDoc = FirebaseFirestore.instance
+      .collection('USERS')
+      .doc(FirebaseAuth.instance.currentUser!.uid);
 
   @override
   void initState() {
@@ -37,6 +46,7 @@ class _MainTopicsPageState extends BaseState<MainTopicsPage> {
     return Scaffold(
       appBar: AppBar(),
       backgroundColor: kBackgroundColor,
+      floatingActionButton: _floatingButton(),
       body: SafeArea(
         bottom: false,
         child: Padding(
@@ -48,6 +58,22 @@ class _MainTopicsPageState extends BaseState<MainTopicsPage> {
               buildSubTopics(),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _floatingButton() {
+    return Padding(
+      padding: EdgeInsets.only(right: dynamicWidth(0.04)),
+      child: FloatingActionButton(
+        onPressed: () {
+          MainTopic wantedToAddTopic = filteredTopics[_selectedIndex];
+          _sureToAddSavedTopicsPopUp(wantedToAddTopic);
+        },
+        child: const Icon(
+          Icons.bookmark_add_outlined,
+          size: 28,
         ),
       ),
     );
@@ -107,7 +133,8 @@ class _MainTopicsPageState extends BaseState<MainTopicsPage> {
             return buildListItem(subTopic, index);
           },
         ),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(_circular)),
       ),
     );
   }
@@ -129,5 +156,46 @@ class _MainTopicsPageState extends BaseState<MainTopicsPage> {
         context,
         MaterialPageRoute(
             builder: (context) => ContentPage(content: subTopic.content)));
+  }
+
+  void _sureToAddSavedTopicsPopUp(MainTopic mainTopic) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Text(
+          '${mainTopic.title} adlı başlığı kaydedilenlere eklemek istediğine emin misin?',
+          style: TextStyle(fontSize: dynamicFontSize(22)),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('İptal'),
+          ),
+          TextButton(
+            onPressed: () => addSaved(mainTopic),
+            child: const Text('Devam'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void addSaved(MainTopic mainTopic) {
+    userDoc.get().then((value) {
+      if (value.data() != null) {
+        _savedTopicList = value.data()!['savedTopics'];
+      }
+      if (!_savedTopicList.contains(mainTopic.id)) {
+        _savedTopicList.add(mainTopic.id);
+        //print(mainTopic.title + "başarılır bir şekilde eklendi");
+        userDoc.update({"savedTopics": _savedTopicList});
+        Navigator.pop(context);
+        Utils.showSnackBar(context, "${mainTopic.title} kaydedildi");
+      } else {
+        Navigator.pop(context);
+        Utils.showSnackBar(
+            context, "Eklemek istediğin konu başlığı zaten kayıtlı.");
+      }
+    });
   }
 }

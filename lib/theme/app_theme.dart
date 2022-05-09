@@ -14,6 +14,8 @@ class AppTheme {
     return ThemeData(
       brightness: Brightness.light,
       primaryColor: kPrimary,
+      floatingActionButtonTheme:
+          const FloatingActionButtonThemeData(backgroundColor: kPrimary),
       appBarTheme: const AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         backgroundColor: Colors.transparent,

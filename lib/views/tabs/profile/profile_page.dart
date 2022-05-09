@@ -74,6 +74,8 @@ class _ProfilePageState extends BaseState<ProfilePage> {
             baseSpace1,
             _name,
             baseSpace1,
+            _mail,
+            baseSpace1,
             _dailyText,
             baseSpace2,
             _buildIconText(
@@ -186,6 +188,13 @@ class _ProfilePageState extends BaseState<ProfilePage> {
     return Text(
       "${newUser.name} ${newUser.surName}",
       style: TextStyle(fontSize: dynamicFontSize(34), color: kTextColor),
+    );
+  }
+
+  Text get _mail {
+    return Text(
+      newUser.mail,
+      style: TextStyle(fontSize: dynamicFontSize(20), color: kTextColor),
     );
   }
 
