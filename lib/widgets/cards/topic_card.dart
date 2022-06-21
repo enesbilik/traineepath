@@ -59,15 +59,16 @@ class TopicCard extends StatelessWidget {
   }
 
   Widget get bgImage {
+    final tempImage = mainTopic.image;
+    final bgImage = tempImage.isEmpty ? defaultImage : tempImage;
     return Ink(
       width: double.infinity,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(_circular)),
+      decoration: BoxDecoration(
+        borderRadius:
+            const BorderRadius.vertical(top: Radius.circular(_circular)),
         image: DecorationImage(
-          image: AssetImage(
-            "assets/images/image3.jpg",
-          ),
-          fit: BoxFit.cover,
+          image: NetworkImage(bgImage),
+          fit: BoxFit.contain,
         ),
       ),
     );

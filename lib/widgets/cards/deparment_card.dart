@@ -5,26 +5,31 @@ import 'package:trainee_path/models/contents/deparment_model.dart';
 import 'package:trainee_path/utilities/utils.dart';
 import 'package:trainee_path/views/tabs/home/main_topics_page.dart';
 
-class DeparmentCard extends StatelessWidget {
+class DeparmentCard extends StatefulWidget {
   final DepartmentModel department;
   const DeparmentCard({Key? key, required this.department}) : super(key: key);
   static const double _circular = 20;
 
+  @override
+  State<DeparmentCard> createState() => _DeparmentCardState();
+}
+
+class _DeparmentCardState extends State<DeparmentCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: Card(
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(_circular)),
+            borderRadius: BorderRadius.circular(DeparmentCard._circular)),
         child: InkWell(
-          borderRadius: BorderRadius.circular(_circular),
+          borderRadius: BorderRadius.circular(DeparmentCard._circular),
           onTap: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => MainTopicsPage(
-                    departmentModel: department,
+                    departmentModel: widget.department,
                   ),
                 ));
           },
@@ -68,7 +73,7 @@ class DeparmentCard extends StatelessWidget {
   Flexible subTitle(BuildContext context) {
     return Flexible(
       child: Text(
-        "${department.topics.length} Adımda ",
+        "${widget.department.topics.length} Adımda ",
         style: kTextStyleNormal.copyWith(
             fontSize: Utils.dynamicFontSize(context, 16)),
       ),
@@ -77,22 +82,26 @@ class DeparmentCard extends StatelessWidget {
 
   Text title(BuildContext context) {
     return Text(
-      department.title,
+      widget.department.title,
       style:
           kTextStyleBold.copyWith(fontSize: Utils.dynamicFontSize(context, 22)),
     );
   }
 
   Widget get bgImage {
+    final tempImage = widget.department.image;
+    final bgImage = tempImage.isEmpty ? defaultImage : tempImage;
     return Ink(
       width: double.infinity,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(_circular)),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(DeparmentCard._circular)),
         image: DecorationImage(
-          image: AssetImage(
-            "assets/images/image3.jpg",
-          ),
-          fit: BoxFit.cover,
+          image: NetworkImage(bgImage),
+          // AssetImage(
+          //   "assets/images/default_img.jpeg",
+          // ),
+          fit: BoxFit.contain,
         ),
       ),
     );

@@ -8,7 +8,6 @@ import '../../../models/contents/main_topic_model.dart';
 import '../../../models/contents/subtopic_model.dart';
 import '../../../services/http/main_topic_service.dart';
 import '../../../widgets/cards/topic_card.dart';
-import '../../../widgets/customs/custom_loading_widget.dart';
 import '../home/content_page.dart';
 
 class BookMark extends StatefulWidget {
@@ -64,8 +63,22 @@ class _BookMarkState extends BaseState<BookMark> {
   Widget buildTopicsCard() {
     return SizedBox(
       height: dynamicHeight(0.22),
-      child:
-          filteredTopics.isNotEmpty ? buildListView() : const CustomLoading(),
+      child: filteredTopics.isNotEmpty
+          ? buildListView()
+          : SizedBox(
+              width: dynamicWidth(0.9),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Center(
+                  child: Text(
+                    "Kaydedilenler boş",
+                    style: kTextStyleNormal.copyWith(
+                        fontSize: dynamicFontSize(24)),
+                  ),
+                ),
+              ),
+            ),
     );
   }
 

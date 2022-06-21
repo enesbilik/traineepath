@@ -25,3 +25,5 @@ final TextStyle kForgotPasswordStyle = TextStyle(
   fontSize: 16,
   letterSpacing: 0.4,
 );
+const defaultImage =
+    'https://sccompany.s3-eu-west-1.amazonaws.com/cover/14320e0e-da92-4767-940f-b2d96c39cc21.jpeg';

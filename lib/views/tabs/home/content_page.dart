@@ -99,8 +99,8 @@ class _ContentPageState extends BaseState<ContentPage> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(15),
-        child: Image.asset(
-          'assets/images/image3.jpg',
+        child: Image.network(
+          widget.content.image,
         ),
       ),
     );
